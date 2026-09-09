@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aller plus loin · Kit J3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{color-scheme:light;--paper:#F7F6F3;--card:#fff;--ink:#15181D;--ink2:#4A5058;--ink3:#7C838C;
+ --rule:#E2E0DA;--rule2:#C9C6BE;--nav:#1B2735;--navink:#EDF1F6;--acc:#2A5FA8;--accbg:#EDF3FC;
+ --ok:#1F7A4D;--okbg:#EDF7F1;--warn:#9A6410;--warnbg:#FBF4E6;
+ --code:#161C26;--codeink:#DCE5F0;--coderule:#2D3846;--sh:0 1px 2px rgba(20,24,30,.06),0 4px 14px rgba(20,24,30,.05)}
+@media(prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;
+ --paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;--ink3:#848B94;--rule:#282D35;--rule2:#3A4049;
+ --nav:#0A0D11;--acc:#7EAAE8;--accbg:#16202E;--ok:#5FC08C;--okbg:#12241A;--warn:#E0A83E;--warnbg:#241C0D;
+ --code:#0A0E14;--coderule:#232B36;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;
+ --ink3:#848B94;--rule:#282D35;--rule2:#3A4049;--nav:#0A0D11;--acc:#7EAAE8;--accbg:#16202E;--ok:#5FC08C;
+ --okbg:#12241A;--warn:#E0A83E;--warnbg:#241C0D;--code:#0A0E14;--coderule:#232B36;
+ --sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15.5px;line-height:1.6}
+header{background:var(--nav);color:var(--navink);padding:26px 20px}
+.in{max-width:880px;margin:0 auto}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8FA5C0;margin:0 0 8px}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(24px,5vw,34px);margin:0 0 8px;letter-spacing:-.02em}
+header p{margin:0;color:#C6D2E0;font-size:14.5px}
+header a{color:#8FA5C0;font-weight:600}
+nav{position:sticky;top:0;z-index:9;background:var(--paper);border-bottom:1px solid var(--rule);padding:8px 20px;overflow-x:auto}
+nav .in{display:flex;gap:6px;white-space:nowrap}
+nav a{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;text-decoration:none;color:var(--ink2);
+ border:1px solid var(--rule2);padding:4px 10px;border-radius:20px}
+nav a:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+main{max-width:880px;margin:0 auto;padding:0 20px 70px}
+.band{font-family:"Archivo",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--ink3);margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule2)}
+.c{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:17px 19px;margin:0 0 12px;box-shadow:var(--sh)}
+.c h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:17.5px;margin:0 0 8px}
+.c h3{font-family:"Archivo",sans-serif;font-size:15px;margin:18px 0 6px}
+.c p{margin:7px 0;color:var(--ink2)}
+.c ul,.c ol{margin:7px 0;padding-left:19px;color:var(--ink2)}.c li{margin:5px 0}
+.b{border-left:3px solid;border-radius:0 7px 7px 0;padding:10px 13px;margin:10px 0}
+.b .t{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.b p:last-child{margin-bottom:0}
+.ba{background:var(--accbg);border-color:var(--acc)}.ba .t{color:var(--acc)}
+.bo{background:var(--okbg);border-color:var(--ok)}.bo .t{color:var(--ok)}
+.bw{background:var(--warnbg);border-color:var(--warn)}.bw .t{color:var(--warn)}
+.p{background:var(--code);color:var(--codeink);border:1px solid var(--coderule);border-radius:8px;margin:10px 0;overflow:hidden}
+.pb{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:6px 11px;border-bottom:1px solid var(--coderule);
+ font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#8FA5C0}
+.p pre{margin:0;padding:12px 14px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+button.k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+ cursor:pointer;background:transparent;color:#8FA5C0;border:1px solid var(--coderule);padding:3px 9px;border-radius:5px}
+button.k:hover{background:#232B36;color:#fff}button.k.ok{color:#6FCF97;border-color:#2E5C43}
+button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:420px}
+th{background:var(--nav);color:var(--navink);text-align:left;padding:7px 10px;font-weight:600;font-size:12px}
+td{border-bottom:1px solid var(--rule);padding:7px 10px;vertical-align:top;color:var(--ink2)}
+td:first-child{color:var(--ink);font-weight:500}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:var(--paper);border:1px solid var(--rule);padding:1px 5px;border-radius:4px}
+a{color:var(--acc)}
+footer{max-width:880px;margin:0 auto;padding:22px 20px 40px;border-top:1px solid var(--rule);color:var(--ink3);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header><div class="in">
+  <p class="eyebrow">Kit J3 · section technique</p>
+  <h1>Aller plus loin</h1>
+  <p>Docker, interfaces web, API, RAG documentaire. <a href="index.html">Retour au kit</a></p>
+</div></header>
+
+<nav><div class="in">
+  <a href="index.html">← Kit</a><a href="#docker">Docker</a><a href="#webui">Open WebUI</a>
+  <a href="#anything">AnythingLLM</a><a href="#api">API</a><a href="#rag">RAG local</a><a href="prompts.html">32 prompts</a>
+</div></nav>
+
+<main>
+
+<div class="b bw" style="margin-top:20px"><span class="t">À lire avant de commencer</span>
+  <p>Cette page suppose que vous êtes à l'aise avec un terminal. Rien ici n'est nécessaire pour la journée : c'est ce qu'il faut si vous voulez déployer pour une équipe plutôt que sur votre seul poste. <b>Toutes les commandes viennent des documentations officielles, vérifiées le 9 septembre 2026.</b></p></div>
+
+<div class="band" id="docker">Docker · la voie propre en entreprise</div>
+
+<div class="c">
+  <h2>Pourquoi Docker plutôt qu'une installation directe</h2>
+  <p>Le conteneur <b>isole complètement</b> Ollama du système : aucune dépendance qui traîne, aucun conflit de version Python ou CUDA. Et le volume rend le déploiement <b>reproductible à l'identique</b> sur n'importe quel poste ou serveur : vous redéployez la même pile en une commande, au lieu de refaire une installation manuelle poste par poste.</p>
+  <div class="p"><div class="pb"><span>Ollama en conteneur</span><button class="k" data-t="d1">Copier</button></div>
+<pre id="d1">docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama</pre></div>
+  <div class="p"><div class="pb"><span>Avec accélération GPU NVIDIA (NVIDIA Container Toolkit requis)</span><button class="k" data-t="d2">Copier</button></div>
+<pre id="d2">docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama</pre></div>
+  <div class="p"><div class="pb"><span>Lancer un modèle dans le conteneur déjà démarré</span><button class="k" data-t="d3">Copier</button></div>
+<pre id="d3">docker exec -it ollama ollama run llama3</pre></div>
+  <div class="b ba"><span class="t">Ce que fait le volume</span>
+    <p><code>-v ollama:/root/.ollama</code> stocke les modèles téléchargés en dehors du conteneur. Sans lui, vous re-téléchargez plusieurs gigaoctets à chaque redémarrage.</p></div>
+</div>
+
+<div class="band" id="webui">Open WebUI · l'interface d'équipe</div>
+
+<div class="c">
+  <h2>C'est ce qu'on recommande à la place de PrivateGPT</h2>
+  <p>Une interface web complète par-dessus Ollama : conversations, documents, comptes utilisateurs.</p>
+  <div class="p"><div class="pb"><span>Installation officielle, connectée à un Ollama déjà installé</span><button class="k" data-t="w1">Copier</button></div>
+<pre id="w1">docker run -d -p 3000:8080 \
+  --add-host=host.docker.internal:host-gateway \
+  -v open-webui:/app/backend/data \
+  -e WEBUI_SECRET_KEY=votre-cle-secrete \
+  --name open-webui --restart always \
+  ghcr.io/open-webui/open-webui:main</pre></div>
+  <p>Interface sur <code>http://localhost:3000</code>. Le flag <code>--add-host</code> suffit à ce qu'Open WebUI trouve tout seul l'Ollama de votre machine.</p>
+  <div class="p"><div class="pb"><span>Alternative sans Docker</span><button class="k" data-t="w2">Copier</button></div>
+<pre id="w2">pip install open-webui
+open-webui serve</pre></div>
+
+  <h3>Interroger vos propres documents</h3>
+  <p>Menu latéral, puis <b>Workspace → Knowledge → Create</b>. Vous donnez un nom, vous téléversez vos fichiers (PDF, texte, code). Ils sont découpés et indexés automatiquement.</p>
+  <p>Ensuite, dans n'importe quelle conversation, le symbole <code>#</code> fait apparaître un menu pour attacher un fichier ou toute la base. Vous pouvez aussi rattacher la base à un modèle en permanence dans <b>Workspace → Models → Edit</b>.</p>
+
+  <h3>Plusieurs utilisateurs, et c'est le point qui compte</h3>
+  <div class="tw"><table>
+    <tr><th>Rôle</th><th>Ce qu'il peut faire</th></tr>
+    <tr><td>Admin</td><td>Le tout premier compte créé. Gère les utilisateurs et les permissions.</td></tr>
+    <tr><td>User</td><td>Utilise l'outil selon les droits de son groupe.</td></tr>
+    <tr><td>Pending</td><td>En attente de validation par un admin. C'est la file d'entrée.</td></tr>
+  </table></div>
+  <div class="b bo"><span class="t">Pourquoi c'est le critère décisif pour une équipe</span>
+    <p>Les permissions se gèrent par groupes depuis <b>Admin Panel → Users → Groups</b>. C'est ce qui rend Open WebUI déployable dans une structure, là où un outil mono-poste s'arrête à votre bureau.</p></div>
+</div>
+
+<div class="band" id="anything">AnythingLLM · le RAG sans configuration</div>
+
+<div class="c">
+  <h2>Deux façons de l'installer</h2>
+  <p><b>Application de bureau</b> : un installeur classique Mac, Windows ou Linux. Pas de terminal, pas de Docker.</p>
+  <div class="p"><div class="pb"><span>Version Docker</span><button class="k" data-t="a1">Copier</button></div>
+<pre id="a1">docker pull mintplexlabs/anythingllm:master
+
+export STORAGE_LOCATION="/var/lib/anythingllm"
+mkdir -p $STORAGE_LOCATION
+touch "$STORAGE_LOCATION/.env"
+
+docker run -d -p 3001:3001 --cap-add SYS_ADMIN \
+  -v ${STORAGE_LOCATION}:/app/server/storage \
+  -v ${STORAGE_LOCATION}/.env:/app/server/.env \
+  -e STORAGE_DIR="/app/server/storage" \
+  mintplexlabs/anythingllm:master</pre></div>
+  <p>Interface sur <code>http://localhost:3001</code>.</p>
+  <div class="b ba"><span class="t">La différence nette avec Open WebUI</span>
+    <p>AnythingLLM embarque <b>une base vectorielle et un pipeline documentaire dès le départ</b> : vous glissez un document dans un espace de travail, il est indexé immédiatement, sans rien configurer. Chez Open WebUI, le RAG est une fonctionnalité additionnelle du chat.</p>
+    <p>Il gère aussi des <b>espaces de travail séparés par projet</b>, chacun avec ses propres documents. Attention : la gestion des accès par espace n'existe qu'en version Docker, pas en version bureau.</p></div>
+</div>
+
+<div class="band" id="api">L'API · brancher vos propres scripts</div>
+
+<div class="c">
+  <h2>Trois façons d'appeler votre modèle local</h2>
+  <div class="p"><div class="pb"><span>Génération simple</span><button class="k" data-t="p1">Copier</button></div>
+<pre id="p1">curl http://localhost:11434/api/generate -d '{
+  "model": "llama3.2",
+  "prompt": "Pourquoi le ciel est-il bleu ?"
+}'</pre></div>
+  <div class="p"><div class="pb"><span>Conversation, avec historique</span><button class="k" data-t="p2">Copier</button></div>
+<pre id="p2">curl http://localhost:11434/api/chat -d '{
+  "model": "llama3.2",
+  "messages": [{"role": "user", "content": "Pourquoi le ciel est-il bleu ?"}]
+}'</pre></div>
+  <div class="p"><div class="pb"><span>L'endpoint compatible OpenAI · celui qui intéresse votre DSI</span><button class="k" data-t="p3">Copier</button></div>
+<pre id="p3">curl -X POST http://localhost:11434/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mistral:7b",
+    "messages": [{"role": "user", "content": "Dis bonjour."}]
+  }'</pre></div>
+  <div class="b bo"><span class="t">Ce que ça permet concrètement</span>
+    <p>Ollama expose <code>/v1/chat/completions</code>, exactement comme OpenAI. Une application existante bascule sur votre modèle local <b>en changeant la seule <code>base_url</code></b> vers <code>http://localhost:11434/v1/</code>. Le code métier ne change pas.</p></div>
+  <div class="p"><div class="pb"><span>En Python, avec la bibliothèque officielle</span><button class="k" data-t="p4">Copier</button></div>
+<pre id="p4">pip install ollama
+
+from ollama import chat
+response = chat(
+    model='gemma3',
+    messages=[{'role': 'user', 'content': 'Pourquoi le ciel est-il bleu ?'}]
+)
+print(response['message']['content'])</pre></div>
+</div>
+
+<div class="band" id="rag">Interroger vos documents, en local</div>
+
+<div class="c">
+  <h2>Le chemin le plus court en 2026</h2>
+  <p><b>AnythingLLM en Docker.</b> Vous glissez un document dans un espace de travail, il est découpé et indexé automatiquement. Aucune base vectorielle à installer séparément.</p>
+  <p>Si vous avez déjà Open WebUI en place, inutile d'ajouter un outil : sa section <b>Workspace → Knowledge</b> couvre le même besoin.</p>
+  <h3>Le modèle qui transforme vos textes en vecteurs</h3>
+  <div class="p"><div class="pb"><span>Le modèle d'embedding à prendre, 274 Mo</span><button class="k" data-t="e1">Copier</button></div>
+<pre id="e1">ollama pull nomic-embed-text</pre></div>
+  <div class="b ba"><span class="t">À quoi sert un modèle d'embedding, en une phrase</span>
+    <p>Il transforme chaque morceau de vos documents en une suite de nombres, pour que le système retrouve les passages qui ressemblent à votre question. C'est ce qui permet de chercher par le sens et pas par les mots exacts.</p></div>
+  <div class="b bw"><span class="t">Le rappel qui vaut pour tout ce qui est sur cette page</span>
+    <p>Un traitement local reste un traitement de données personnelles. Aucune de ces installations ne vous dispense d'une base légale, de la minimisation, de la sécurité ni de l'information des personnes. <b>Et rien de tout ceci ne se met en production sans l'accord de votre responsable de la sécurité des systèmes d'information.</b></p></div>
+</div>
+
+</main>
+
+<footer>
+  <p>Commandes vérifiées le 9 septembre 2026 sur les documentations officielles : docs.ollama.com, docs.openwebui.com, docs.anythingllm.com, Docker Hub.</p>
+  <p>Formation Référent IA, journée 3, animée par Clément Predo pour l'Agence Nikita. <a href="https://www.linkedin.com/in/clement-predo" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+
+<script>
+document.querySelectorAll("button.k").forEach(function(b){b.addEventListener("click",function(){
+var e=document.getElementById(b.dataset.t);if(!e)return;
+navigator.clipboard.writeText(e.innerText).then(function(){var o=b.textContent;b.textContent="Copié";b.classList.add("ok");
+setTimeout(function(){b.textContent=o;b.classList.remove("ok");},1500);}).catch(function(){});});});
+</script>
+</body>
+</html>
