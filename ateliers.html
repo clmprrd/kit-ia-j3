@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Les 6 ateliers · Kit J3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{color-scheme:light;--paper:#F7F6F3;--card:#fff;--ink:#15181D;--ink2:#4A5058;--ink3:#7C838C;
+ --rule:#E2E0DA;--rule2:#C9C6BE;--nav:#1B2735;--navink:#EDF1F6;--acc:#2A5FA8;--accbg:#EDF3FC;
+ --ok:#1F7A4D;--okbg:#EDF7F1;--warn:#9A6410;--warnbg:#FBF4E6;--ko:#B33232;--kobg:#FCEFEF;
+ --code:#161C26;--codeink:#DCE5F0;--coderule:#2D3846;--sh:0 1px 2px rgba(20,24,30,.06),0 4px 14px rgba(20,24,30,.05)}
+@media(prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;
+ --paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;--ink3:#848B94;--rule:#282D35;--rule2:#3A4049;
+ --nav:#0A0D11;--acc:#7EAAE8;--accbg:#16202E;--ok:#5FC08C;--okbg:#12241A;--warn:#E0A83E;--warnbg:#241C0D;
+ --ko:#EE7C7C;--kobg:#261314;--code:#0A0E14;--coderule:#232B36;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;
+ --ink3:#848B94;--rule:#282D35;--rule2:#3A4049;--nav:#0A0D11;--acc:#7EAAE8;--accbg:#16202E;--ok:#5FC08C;
+ --okbg:#12241A;--warn:#E0A83E;--warnbg:#241C0D;--ko:#EE7C7C;--kobg:#261314;--code:#0A0E14;--coderule:#232B36;
+ --sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15.5px;line-height:1.6}
+header{background:var(--nav);color:var(--navink);padding:26px 20px}
+.in{max-width:880px;margin:0 auto}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8FA5C0;margin:0 0 8px}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(24px,5vw,34px);margin:0 0 8px;letter-spacing:-.02em}
+header p{margin:0;color:#C6D2E0;font-size:14.5px}header a{color:#8FA5C0;font-weight:600}
+nav{position:sticky;top:0;z-index:9;background:var(--paper);border-bottom:1px solid var(--rule);padding:8px 20px;overflow-x:auto}
+nav .in{display:flex;gap:6px;white-space:nowrap}
+nav a{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;text-decoration:none;color:var(--ink2);
+ border:1px solid var(--rule2);padding:4px 10px;border-radius:20px}
+nav a:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+main{max-width:880px;margin:0 auto;padding:0 20px 70px}
+.at{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:0;margin:22px 0;overflow:hidden;box-shadow:var(--sh)}
+.ath{background:var(--nav);color:var(--navink);padding:14px 20px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.ath .n{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;background:var(--acc);padding:2px 9px;border-radius:5px}
+.ath h2{font-family:"Archivo",sans-serif;font-size:19px;margin:0;flex:1;min-width:180px}
+.ath .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#8FA5C0}
+.atb{padding:18px 20px}
+.step{display:flex;gap:12px;margin:12px 0;align-items:flex-start}
+.step .num{flex:0 0 26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;
+ font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.step .txt{flex:1;color:var(--ink2)}
+.step .txt b{color:var(--ink)}
+h3{font-family:"Archivo",sans-serif;font-size:15px;margin:20px 0 8px}
+p{margin:8px 0;color:var(--ink2)}
+.b{border-left:3px solid;border-radius:0 7px 7px 0;padding:11px 14px;margin:12px 0}
+.b .t{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.b p:last-child{margin-bottom:0}
+.ba{background:var(--accbg);border-color:var(--acc)}.ba .t{color:var(--acc)}
+.bo{background:var(--okbg);border-color:var(--ok)}.bo .t{color:var(--ok)}
+.bw{background:var(--warnbg);border-color:var(--warn)}.bw .t{color:var(--warn)}
+.bk{background:var(--kobg);border-color:var(--ko)}.bk .t{color:var(--ko)}
+.p{background:var(--code);color:var(--codeink);border:1px solid var(--coderule);border-radius:8px;margin:11px 0;overflow:hidden}
+.pb{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:6px 11px;border-bottom:1px solid var(--coderule);
+ font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#8FA5C0}
+.p pre{margin:0;padding:12px 14px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+button.k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+ cursor:pointer;background:transparent;color:#8FA5C0;border:1px solid var(--coderule);padding:3px 9px;border-radius:5px}
+button.k:hover{background:#232B36;color:#fff}button.k.ok{color:#6FCF97;border-color:#2E5C43}
+button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.tw{overflow-x:auto;margin:11px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:440px}
+th{background:var(--nav);color:var(--navink);text-align:left;padding:7px 10px;font-weight:600;font-size:12px}
+td{border-bottom:1px solid var(--rule);padding:7px 10px;vertical-align:top;color:var(--ink2)}
+td:first-child{color:var(--ink);font-weight:500}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:var(--paper);border:1px solid var(--rule);padding:1px 5px;border-radius:4px}
+a{color:var(--acc)}
+footer{max-width:880px;margin:0 auto;padding:22px 20px 40px;border-top:1px solid var(--rule);color:var(--ink3);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header><div class="in">
+  <p class="eyebrow">Kit J3 · tous les ateliers</p>
+  <h1>Ce que vous faites, atelier par atelier</h1>
+  <p>Six ateliers, du diagnostic du matin à la matrice de l'après-midi. <a href="index.html">Retour au kit</a></p>
+</div></header>
+
+<nav><div class="in">
+  <a href="index.html">← Kit</a><a href="#a0">Diagnostic</a><a href="#a1">Atelier 1</a><a href="#a2">Atelier 2</a>
+  <a href="#a3">Atelier 3</a><a href="#a4">Atelier 4</a><a href="#a5">Atelier 5</a>
+  <a href="prompts.html">32 prompts</a><a href="technique.html">Technique</a>
+</div></nav>
+
+<main>
+
+<div class="b ba" style="margin-top:20px"><span class="t">La règle qui vaut pour les six ateliers</span>
+  <p><b>Aucune donnée réelle.</b> Pas de nom de client, pas de document d'entreprise, pas de donnée personnelle. Les cas fournis sont fictifs et suffisent. Cette règle ne se discute pas.</p></div>
+
+<!-- ══════════ DIAGNOSTIC ══════════ -->
+<div class="at" id="a0">
+  <div class="ath"><span class="n">9h20</span><h2>Diagnostic d'entrée</h2><span class="d">15 min · seul</span></div>
+  <div class="atb">
+    <p><b>Pourquoi cet atelier.</b> Constater vous-même, sur votre propre travail, que le même prompt ne donne pas le même résultat deux fois. Tout le reste de la matinée s'appuie sur cet écart.</p>
+    <h3>Ce que vous faites, dans l'ordre</h3>
+    <div class="step"><div class="num">1</div><div class="txt">Écrivez un prompt <b>court</b> sur une tâche de votre métier. Quelque chose que vous demanderiez vraiment.</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Lancez-le une première fois. Copiez la réponse.</div></div>
+    <div class="step"><div class="num">3</div><div class="txt"><b>Sans rien changer du tout</b>, relancez exactement le même prompt. Copiez la seconde réponse.</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Collez les deux réponses côte à côte et notez <b>trois différences</b> que vous voyez.</div></div>
+    <h3>Ce que vous rendez</h3>
+    <p>Un document avec les deux sorties côte à côte, et trois différences identifiées.</p>
+    <div class="b bo"><span class="t">Ce que vous allez trouver, et c'est le but</span>
+      <p>Le format change. Le niveau de détail change. Et surtout, il comble les trous : il invente un responsable, une échéance, de façon parfaitement crédible. <b>Ce n'est pas un bug, c'est le fonctionnement normal.</b></p></div>
+  </div>
+</div>
+
+<!-- ══════════ ATELIER 1 ══════════ -->
+<div class="at" id="a1">
+  <div class="ath"><span class="n">10h15</span><h2>Atelier 1 · Le même besoin dans trois grammaires</h2><span class="d">30 min · sous-groupes de 3 à 4</span></div>
+  <div class="atb">
+    <p><b>Pourquoi cet atelier.</b> Sentir ce que chaque framework fait gagner et perdre sur un besoin identique, au lieu de croire qu'il en existe un meilleur.</p>
+    <h3>Ce que vous faites, dans l'ordre</h3>
+    <div class="step"><div class="num">1</div><div class="txt">Prenez <b>le cas fil rouge</b> choisi par le groupe ce matin.</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Écrivez-le en <b>RICCE</b> : rôle, instructions, contexte, contraintes, exemple.</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Réécrivez le même besoin en <b>CO-STAR</b> : contexte, objectif, style, ton, audience, réponse attendue.</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Réécrivez-le une troisième fois en <b>RACE</b> : rôle, action, contexte, attendu.</div></div>
+    <div class="step"><div class="num">5</div><div class="txt">Lancez les trois. Comparez les sorties.</div></div>
+    <div class="step"><div class="num">6</div><div class="txt">Écrivez en <b>trois lignes</b> lequel vous gardez, et pourquoi.</div></div>
+    <div class="p"><div class="pb"><span>Le gabarit RICCE, à remplir</span><button class="k" data-t="g1">Copier</button></div>
+<pre id="g1">Tu es [rôle précis].
+Voici ce que je veux : [instructions].
+Contexte : [ce que le modèle ne peut pas deviner].
+Contraintes : [longueur, ton, ce qu'il ne doit pas faire].
+Exemple de ce que j'attends : [un échantillon].
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+    <div class="p"><div class="pb"><span>Le gabarit CO-STAR, à remplir</span><button class="k" data-t="g2">Copier</button></div>
+<pre id="g2">Contexte : [la situation].
+Objectif : [ce que le texte doit accomplir].
+Style : [factuel, narratif, technique].
+Ton : [neutre, chaleureux, ferme].
+Audience : [qui va lire].
+Réponse attendue : [format exact].</pre></div>
+    <h3>Ce que vous rendez</h3>
+    <p>Les trois versions du prompt, les trois sorties obtenues, et votre choix argumenté en trois lignes. <b>22 minutes de production, 8 minutes de restitution.</b></p>
+    <div class="b bw"><span class="t">La colonne qui compte vraiment dans la restitution</span>
+      <p>Pas « laquelle est la plus belle », mais : <b>est-ce qu'un collègue pourrait reprendre ce prompt sans vous ?</b> Un prompt qui produit une belle sortie mais que personne d'autre ne peut reprendre n'est pas un livrable, c'est un coup de chance personnel.</p></div>
+  </div>
+</div>
+
+<!-- ══════════ ATELIER 2 ══════════ -->
+<div class="at" id="a2">
+  <div class="ath"><span class="n">11h20</span><h2>Atelier 2 · Un arbitrage en tree-of-thought</h2><span class="d">20 min · en binôme</span></div>
+  <div class="atb">
+    <p><b>Pourquoi cet atelier.</b> Obtenir trois options <b>vraiment</b> différentes, et découvrir par vous-même que le modèle a du mal à diverger.</p>
+    <h3>Ce que vous faites, dans l'ordre</h3>
+    <div class="step"><div class="num">1</div><div class="txt">Choisissez <b>un arbitrage de votre métier</b> : une vraie décision où plusieurs options se défendent.</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Écrivez un prompt <b>en trois temps</b>, dans un seul et même message. Le gabarit est ci-dessous.</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Lancez-le, et lisez les trois options obtenues.</div></div>
+    <div class="step"><div class="num">4</div><div class="txt"><b>Repérez les doublons déguisés</b> : les options qui disent la même chose autrement.</div></div>
+    <div class="step"><div class="num">5</div><div class="txt">S'il y en a, relancez en ajoutant la contrainte de divergence, et comparez.</div></div>
+    <div class="p"><div class="pb"><span>Le prompt en trois temps</span><button class="k" data-t="t1">Copier</button></div>
+<pre id="t1">Propose trois approches différentes de ce problème,
+sans les développer, une phrase chacune.
+Pour chacune, donne un avantage et une limite.
+Puis choisis celle que tu recommandes et dis-moi pourquoi.</pre></div>
+    <div class="p"><div class="pb"><span>La contrainte de divergence, si les options se ressemblent</span><button class="k" data-t="t2">Copier</button></div>
+<pre id="t2">Les trois approches doivent reposer sur des logiques différentes,
+pas sur des variantes de la même idée.</pre></div>
+    <h3>Ce que vous rendez</h3>
+    <p>Le prompt, les trois options, et la mention de celles qui étaient des doublons. <b>14 minutes de production, 6 de restitution.</b></p>
+    <div class="b bk"><span class="t">Ce qui va vous arriver, et ce n'est pas votre faute</span>
+      <p><b>Neuf fois sur dix, la troisième option est une variante de la première.</b> Le modèle s'ancre sur sa première idée. C'est exactement pour ça que les trois temps doivent être dans un seul prompt, et que la contrainte de divergence existe.</p></div>
+  </div>
+</div>
+
+<!-- ══════════ ATELIER 3 ══════════ -->
+<div class="at" id="a3">
+  <div class="ath"><span class="n">12h15</span><h2>Atelier 3 · Ouvrir votre bibliothèque</h2><span class="d">15 min · seul</span></div>
+  <div class="atb">
+    <p><b>Pourquoi cet atelier.</b> C'est le livrable de votre matinée. Vous repartez avec une bibliothèque commencée, pas avec l'intention d'en commencer une.</p>
+    <h3>Ce que vous faites, dans l'ordre</h3>
+    <div class="step"><div class="num">1</div><div class="txt">Reprenez <b>trois prompts</b> que vous avez écrits ce matin, dans les ateliers précédents.</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Pour chacun, remplissez les <b>huit champs</b> du gabarit ci-dessous.</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Déposez les trois fiches dans le <b>document partagé</b> dont le formateur donne le lien.</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Pour la mise en commun, préparez-vous à lire à voix haute <b>un seul champ</b> : le critère de succès de l'une de vos fiches.</div></div>
+    <div class="p"><div class="pb"><span>Le gabarit d'une fiche</span><button class="k" data-t="f1">Copier</button></div>
+<pre id="f1">Titre             : verbe à l'infinitif + objet
+Version           : v1
+Cas d'usage       : quand l'utiliser, une phrase
+Framework         : RICCE / CO-STAR / RACE
+Le prompt         : (en entier)
+Critère de succès : comment je sais que la sortie est bonne
+Testé             : oui / non
+Dernière revue    : jj/mm/aaaa</pre></div>
+    <div class="b bo"><span class="t">La seule règle qui compte</span>
+      <p><b>Un prompt qui n'a pas été lancé au moins une fois n'entre pas dans la bibliothèque.</b> Dans six mois, la colonne « testé » est la seule qui vous dira ce qui marche encore.</p></div>
+    <div class="b ba"><span class="t">Pour l'intersession</span>
+      <p>Portez votre bibliothèque à <b>dix fiches d'ici J8</b>. Ce n'est pas noté : c'est le matériau de la bibliothèque collective de la promotion. Vous partez déjà avec <a href="prompts.html">32 prompts métier</a> pour vous inspirer.</p></div>
+  </div>
+</div>
+
+<!-- ══════════ ATELIER 4 ══════════ -->
+<div class="at" id="a4">
+  <div class="ath"><span class="n">15h05</span><h2>Atelier 4 · Classer cinq jeux de données</h2><span class="d">14 min · en binôme</span></div>
+  <div class="atb">
+    <p><b>Pourquoi cet atelier.</b> Apprendre à classer <b>sans hésiter</b>, en posant une question de test plutôt qu'en suivant une impression. Sans cette discipline, on range tout en N3 par prudence et la matrice devient inutilisable.</p>
+    <h3>La grille</h3>
+    <div class="tw"><table>
+      <tr><th>Niveau</th><th>La question de test à poser à voix haute</th></tr>
+      <tr><td><b>N1</b> publique</td><td>Cette information est-elle déjà accessible à l'extérieur ?</td></tr>
+      <tr><td><b>N2</b> interne</td><td>Sa divulgation gênerait-elle, sans causer de préjudice caractérisé ?</td></tr>
+      <tr><td><b>N3</b> confidentielle</td><td>Sa divulgation causerait-elle un préjudice commercial, juridique ou concurrentiel ?</td></tr>
+      <tr><td><b>N4</b> sensible</td><td>Contient-elle des données personnelles, de santé, ou relevant d'une obligation légale ?</td></tr>
+    </table></div>
+    <h3>Les cinq jeux de données à classer</h3>
+    <div class="tw"><table>
+      <tr><th>#</th><th>Le jeu de données</th></tr>
+      <tr><td><b>1</b></td><td>Le <b>règlement intérieur</b> de votre structure, déjà publié sur l'intranet et remis à chaque nouvel arrivant.</td></tr>
+      <tr><td><b>2</b></td><td>Le <b>compte rendu du dernier comité de direction</b>, avec les arbitrages budgétaires et les noms des porteurs de projet.</td></tr>
+      <tr><td><b>3</b></td><td>Les <b>tickets envoyés au support informatique</b> le mois dernier, tels quels, avec leurs captures d'écran.</td></tr>
+      <tr><td><b>4</b></td><td>La <b>grille tarifaire négociée</b> avec votre principal fournisseur, valable trois ans.</td></tr>
+      <tr><td><b>5</b></td><td>Le <b>registre des arrêts de travail</b> du trimestre, avec les dates et les durées.</td></tr>
+    </table></div>
+    <h3>Ce que vous faites</h3>
+    <div class="step"><div class="num">1</div><div class="txt">Pour chacun des cinq, donnez un <b>niveau de 1 à 4</b>.</div></div>
+    <div class="step"><div class="num">2</div><div class="txt">Et surtout, écrivez <b>la question de test qui vous a fait trancher</b>. C'est elle qu'on regardera, pas le niveau.</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Avant de conclure sur chacun, posez-vous la question préalable ci-dessous.</div></div>
+    <div class="b bo"><span class="t">La question à poser AVANT toutes les autres</span>
+      <p><b>Est-ce que cette donnée doit vraiment entrer dans la machine ?</b> Souvent la réponse est non : on anonymise, on ne garde que la structure, et le problème disparaît avant même de choisir une architecture.</p></div>
+    <div class="b bw"><span class="t">Le numéro 3 est un piège volontaire, et c'est le meilleur du lot</span>
+      <p>Des tickets de support paraissent anodins. Mais ils contiennent des noms, parfois des mots de passe tapés par erreur, et des captures d'écran de sessions ouvertes. Selon ce qu'on regarde, il est <b>N2 ou N4</b>. Les désaccords entre binômes sur celui-là sont la matière la plus utile de l'atelier.</p></div>
+    <div class="b ba"><span class="t">La règle à retenir en conclusion</span>
+      <p>En cas de doute persistant, on retient <b>le niveau le plus élevé</b>, et on écrit pourquoi. Documenter le doute vaut mieux que trancher au hasard.</p></div>
+  </div>
+</div>
+
+<!-- ══════════ ATELIER 5 ══════════ -->
+<div class="at" id="a5">
+  <div class="ath"><span class="n">15h45</span><h2>Atelier 5 · Trois cas passés à la matrice</h2><span class="d">30 min · sous-groupes</span></div>
+  <div class="atb">
+    <p><b>Pourquoi cet atelier.</b> C'est l'exercice le plus proche de ce qu'on vous demandera dans votre structure : produire un verdict <b>que vous pouvez défendre</b>, pas une opinion.</p>
+    <h3>La méthode, et l'ordre compte</h3>
+    <div class="step"><div class="num">1</div><div class="txt"><b>Qualifiez la sensibilité</b> des données avec les quatre niveaux de l'atelier 4.</div></div>
+    <div class="step"><div class="num">2</div><div class="txt"><b>Vérifiez les deux vetos.</b> Si l'un se déclenche, vous vous arrêtez là : inutile de remplir les sept critères.</div></div>
+    <div class="step"><div class="num">3</div><div class="txt">Si aucun veto ne se déclenche, remplissez les <b>sept critères</b>. Pour chacun, vous ne notez pas : vous dites seulement <b>vers quoi il pousse</b>, cloud ou on-prem.</div></div>
+    <div class="step"><div class="num">4</div><div class="txt">Formulez votre verdict, avec <b>les deux ou trois critères qui l'ont emporté</b>.</div></div>
+    <div class="b bk"><span class="t">Les deux vetos, qui passent avant tout</span>
+      <p><b>V-A</b> · une donnée de niveau 4 ne part pas chez un fournisseur soumis à un droit étranger.</p>
+      <p><b>V-B</b> · pas de solution locale sans personne identifiée pour l'exploiter, la mettre à jour et la superviser dans la durée. <b>C'est celui qu'on oublie, et celui qui tue les projets six mois après.</b></p></div>
+    <h3>Les trois cas, à traiter dans cet ordre : 1, puis 3, puis 2</h3>
+
+    <div class="b ba"><span class="t">Cas 1 · Assistant de réponse aux appels d'offres publics</span>
+      <p>Une PME de 60 personnes veut un assistant qui rédige les réponses techniques à partir de ses références passées. Les documents contiennent <b>des prix pratiqués et des méthodes propres</b>. <b>Deux ingénieurs</b> sont volontaires pour maintenir l'outil. L'usage est <b>irrégulier</b> : quelques journées intenses par mois.</p></div>
+
+    <div class="b ba"><span class="t">Cas 3 · Assistant sur les procédures internes d'une collectivité</span>
+      <p>Une collectivité veut un assistant qui répond aux questions de ses agents sur ses propres procédures, <b>déjà publiées sur son intranet</b>. Volume modéré. Un service informatique existe, avec <b>une personne identifiée</b>. <b>Aucune donnée personnelle.</b></p></div>
+
+    <div class="b ba"><span class="t">Cas 2 · Comptes rendus dans un service de soins · gardez-le pour la fin</span>
+      <p>Un établissement veut aider ses soignants à structurer des comptes rendus. Les textes contiennent <b>des données de santé identifiantes</b>. Volume quotidien et régulier. <b>Aucune équipe informatique interne</b>, l'infrastructure est infogérée par un prestataire.</p></div>
+
+    <h3>Ce que vous rendez</h3>
+    <p>Un verdict par cas, avec les deux ou trois critères qui l'ont emporté. <b>Pas un score : un raisonnement.</b> 22 minutes de travail, 8 minutes de restitution.</p>
+
+    <div class="b bw"><span class="t">Trois pièges volontaires, un par cas</span>
+      <p><b>Cas 1</b> · l'erreur fréquente est de conclure « on-prem » sur la seule sensibilité. La sensibilité seule ne décide pas, sauf veto. Un matériel utilisé cinq jours par mois se justifie mal.</p>
+      <p><b>Cas 3</b> · le mot « collectivité » déclenche un réflexe « souveraineté obligatoire ». Or la donnée est publique. <b>La matrice sert précisément à empêcher ce réflexe.</b></p>
+      <p><b>Cas 2</b> · les deux vetos se déclenchent et se contredisent. <b>C'est voulu.</b> La matrice ne tranche pas seule : elle vous donne la question à poser au responsable de la conformité. Répondre « on ne peut pas décider seul ici » est la bonne réponse, pas un aveu d'échec.</p></div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p><b>Un prompt qui ne peut pas être relu, réutilisé et corrigé par un collègue n'est pas un livrable professionnel.</b></p>
+  <p>Formation Référent IA, journée 3, animée par Clément Predo pour l'Agence Nikita. <a href="https://www.linkedin.com/in/clement-predo" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+
+<script>
+document.querySelectorAll("button.k").forEach(function(b){b.addEventListener("click",function(){
+var e=document.getElementById(b.dataset.t);if(!e)return;
+navigator.clipboard.writeText(e.innerText).then(function(){var o=b.textContent;b.textContent="Copié";b.classList.add("ok");
+setTimeout(function(){b.textContent=o;b.classList.remove("ok");},1500);}).catch(function(){});});});
+</script>
+</body>
+</html>
