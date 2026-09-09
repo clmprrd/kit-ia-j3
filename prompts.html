@@ -1,0 +1,403 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>32 prompts métier · Kit J3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{color-scheme:light;--paper:#F7F6F3;--card:#fff;--ink:#15181D;--ink2:#4A5058;--ink3:#7C838C;
+ --rule:#E2E0DA;--rule2:#C9C6BE;--nav:#1B2735;--navink:#EDF1F6;--acc:#2A5FA8;
+ --code:#161C26;--codeink:#DCE5F0;--coderule:#2D3846;--sh:0 1px 2px rgba(20,24,30,.06),0 4px 14px rgba(20,24,30,.05)}
+@media(prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;
+ --paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;--ink3:#848B94;--rule:#282D35;--rule2:#3A4049;
+ --nav:#0A0D11;--acc:#7EAAE8;--code:#0A0E14;--coderule:#232B36;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;
+ --ink3:#848B94;--rule:#282D35;--rule2:#3A4049;--nav:#0A0D11;--acc:#7EAAE8;--code:#0A0E14;--coderule:#232B36;
+ --sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15.5px;line-height:1.6}
+header{background:var(--nav);color:var(--navink);padding:26px 20px}
+.in{max-width:860px;margin:0 auto}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8FA5C0;margin:0 0 8px}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(24px,5vw,34px);margin:0 0 8px;letter-spacing:-.02em}
+header p{margin:0;color:#C6D2E0;font-size:14.5px}
+main{max-width:860px;margin:0 auto;padding:0 20px 70px}
+h2{font-family:"Archivo",sans-serif;font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);
+ margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule2)}
+.pr{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;margin:0 0 12px;box-shadow:var(--sh)}
+.prh{display:flex;gap:10px;align-items:baseline;margin-bottom:8px}
+.ref{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;background:var(--acc);color:#fff;padding:2px 8px;border-radius:5px}
+.pr h3{font-family:"Archivo",sans-serif;font-size:16.5px;margin:0}
+.tw{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:380px}
+td{border-bottom:1px solid var(--rule);padding:6px 9px;vertical-align:top;color:var(--ink2)}
+td.l{color:var(--ink);font-weight:500;white-space:nowrap;width:1%}
+.p{background:var(--code);color:var(--codeink);border:1px solid var(--coderule);border-radius:8px;margin:9px 0 0;overflow:hidden}
+.pb{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:6px 11px;border-bottom:1px solid var(--coderule);
+ font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#8FA5C0}
+.p pre{margin:0;padding:12px 14px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+button.k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+ cursor:pointer;background:transparent;color:#8FA5C0;border:1px solid var(--coderule);padding:3px 9px;border-radius:5px}
+button.k:hover{background:#232B36;color:#fff}button.k.ok{color:#6FCF97;border-color:#2E5C43}
+button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+footer{max-width:860px;margin:0 auto;padding:20px;border-top:1px solid var(--rule);color:var(--ink3);font-size:13.5px}
+</style></head><body>
+<header><div class="in">
+<p class="eyebrow">Formation Référent IA · Agence Nikita · Journée 3</p>
+<h1>32 prompts métier</h1>
+<p>Six familles, prêts à adapter. Chacun se copie en un clic.</p>
+</div></header>
+<main>
+<p style="color:var(--ink2)">Chaque fiche donne le rôle, l'objectif, les contraintes et le format attendu. Le bloc noir est le prompt reconstitué, à adapter à votre contexte avant de le lancer. <b>Un prompt qui n'a pas été lancé au moins une fois n'entre pas dans votre bibliothèque.</b></p>
+<h2>Famille A · Rédaction et communication professionnelle</h2>
+<div class="pr">
+  <div class="prh"><span class="ref">A1</span><h3>Note de synthèse pour une direction</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Analyste habitué aux comités de direction</td></tr><tr><td class="l">Objectif</td><td>Ramener un document long à ce qui appelle une décision</td></tr><tr><td class="l">Contraintes clés</td><td>250 mots maximum, aucun adjectif d&#x27;appréciation, toute affirmation chiffrée sourcée sur le document fourni</td></tr><tr><td class="l">Format de sortie</td><td>Titre, 3 constats, 1 décision demandée, 1 risque si l&#x27;on ne décide pas</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xA1">Copier</button></div>
+<pre id="xA1">Rôle : Analyste habitué aux comités de direction
+Objectif : Ramener un document long à ce qui appelle une décision
+Contraintes clés : 250 mots maximum, aucun adjectif d&#x27;appréciation, toute affirmation chiffrée sourcée sur le document fourni
+Format de sortie : Titre, 3 constats, 1 décision demandée, 1 risque si l&#x27;on ne décide pas
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">A2</span><h3>Compte rendu de réunion actionnable</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Secrétaire de séance rigoureux</td></tr><tr><td class="l">Objectif</td><td>Transformer des notes brutes en relevé de décisions</td></tr><tr><td class="l">Contraintes clés</td><td>Ne rien inventer, marquer [à confirmer] tout point ambigu, ne pas reformuler les désaccords en consensus</td></tr><tr><td class="l">Format de sortie</td><td>Décisions, actions avec porteur et échéance, points ouverts</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xA2">Copier</button></div>
+<pre id="xA2">Rôle : Secrétaire de séance rigoureux
+Objectif : Transformer des notes brutes en relevé de décisions
+Contraintes clés : Ne rien inventer, marquer [à confirmer] tout point ambigu, ne pas reformuler les désaccords en consensus
+Format de sortie : Décisions, actions avec porteur et échéance, points ouverts
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">A3</span><h3>Courriel de relance sans agressivité</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Rédacteur commercial sobre</td></tr><tr><td class="l">Objectif</td><td>Relancer un interlocuteur silencieux sans le mettre en défaut</td></tr><tr><td class="l">Contraintes clés</td><td>120 mots maximum, aucune formule culpabilisante, une seule demande, une porte de sortie explicite</td></tr><tr><td class="l">Format de sortie</td><td>Objet, corps, formule de fin</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xA3">Copier</button></div>
+<pre id="xA3">Rôle : Rédacteur commercial sobre
+Objectif : Relancer un interlocuteur silencieux sans le mettre en défaut
+Contraintes clés : 120 mots maximum, aucune formule culpabilisante, une seule demande, une porte de sortie explicite
+Format de sortie : Objet, corps, formule de fin
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">A4</span><h3>Réécriture au niveau de lecture du destinataire</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Vulgarisateur technique</td></tr><tr><td class="l">Objectif</td><td>Rendre un texte technique lisible par un non-spécialiste</td></tr><tr><td class="l">Contraintes clés</td><td>Conserver tous les faits, ne supprimer aucun chiffre, expliciter chaque sigle à sa première occurrence</td></tr><tr><td class="l">Format de sortie</td><td>Texte réécrit, puis liste des termes explicités</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xA4">Copier</button></div>
+<pre id="xA4">Rôle : Vulgarisateur technique
+Objectif : Rendre un texte technique lisible par un non-spécialiste
+Contraintes clés : Conserver tous les faits, ne supprimer aucun chiffre, expliciter chaque sigle à sa première occurrence
+Format de sortie : Texte réécrit, puis liste des termes explicités
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">A5</span><h3>Réponse à une objection écrite</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Interlocuteur calme et factuel</td></tr><tr><td class="l">Objectif</td><td>Répondre à une critique sans polémiquer</td></tr><tr><td class="l">Contraintes clés</td><td>Reconnaître d&#x27;abord ce qui est fondé, ne jamais nier un fait vérifiable, proposer une suite concrète</td></tr><tr><td class="l">Format de sortie</td><td>Ce qui est exact, ce qui mérite précision, ce que je propose</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xA5">Copier</button></div>
+<pre id="xA5">Rôle : Interlocuteur calme et factuel
+Objectif : Répondre à une critique sans polémiquer
+Contraintes clés : Reconnaître d&#x27;abord ce qui est fondé, ne jamais nier un fait vérifiable, proposer une suite concrète
+Format de sortie : Ce qui est exact, ce qui mérite précision, ce que je propose
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">A6</span><h3>Traduction avec préservation du registre</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Traducteur professionnel du domaine</td></tr><tr><td class="l">Objectif</td><td>Traduire en gardant le niveau de langue d&#x27;origine</td></tr><tr><td class="l">Contraintes clés</td><td>Ne pas lisser le registre, signaler tout intraduisible en note, conserver la terminologie métier fournie</td></tr><tr><td class="l">Format de sortie</td><td>Traduction, puis notes du traducteur</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xA6">Copier</button></div>
+<pre id="xA6">Rôle : Traducteur professionnel du domaine
+Objectif : Traduire en gardant le niveau de langue d&#x27;origine
+Contraintes clés : Ne pas lisser le registre, signaler tout intraduisible en note, conserver la terminologie métier fournie
+Format de sortie : Traduction, puis notes du traducteur
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<h2>Famille B · Analyse et aide à la décision</h2>
+<div class="pr">
+  <div class="prh"><span class="ref">B1</span><h3>Analyse d&#x27;un document contradictoire</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Analyste critique</td></tr><tr><td class="l">Objectif</td><td>Faire ressortir les tensions internes d&#x27;un document</td></tr><tr><td class="l">Contraintes clés</td><td>Citer chaque contradiction par sa phrase exacte, ne pas trancher, ne pas harmoniser</td></tr><tr><td class="l">Format de sortie</td><td>Tableau : affirmation 1, affirmation 2, nature de la tension</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xB1">Copier</button></div>
+<pre id="xB1">Rôle : Analyste critique
+Objectif : Faire ressortir les tensions internes d&#x27;un document
+Contraintes clés : Citer chaque contradiction par sa phrase exacte, ne pas trancher, ne pas harmoniser
+Format de sortie : Tableau : affirmation 1, affirmation 2, nature de la tension
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">B2</span><h3>Comparatif de solutions sur critères imposés</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Consultant en sélection d&#x27;outils</td></tr><tr><td class="l">Objectif</td><td>Comparer sans recommander implicitement</td></tr><tr><td class="l">Contraintes clés</td><td>Utiliser exactement les critères fournis, aucun critère ajouté, dire « information non disponible » plutôt que d&#x27;estimer</td></tr><tr><td class="l">Format de sortie</td><td>Tableau critères en lignes, solutions en colonnes</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xB2">Copier</button></div>
+<pre id="xB2">Rôle : Consultant en sélection d&#x27;outils
+Objectif : Comparer sans recommander implicitement
+Contraintes clés : Utiliser exactement les critères fournis, aucun critère ajouté, dire « information non disponible » plutôt que d&#x27;estimer
+Format de sortie : Tableau critères en lignes, solutions en colonnes
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">B3</span><h3>Pré-mortem d&#x27;un projet</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Chef de projet expérimenté et pessimiste</td></tr><tr><td class="l">Objectif</td><td>Lister ce qui aura fait échouer le projet, vu depuis l&#x27;échec</td></tr><tr><td class="l">Contraintes clés</td><td>Se placer six mois après l&#x27;échec, écrire au passé, aucune cause générique du type « mauvaise communication »</td></tr><tr><td class="l">Format de sortie</td><td>8 causes classées par probabilité, avec le signal précoce de chacune</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xB3">Copier</button></div>
+<pre id="xB3">Rôle : Chef de projet expérimenté et pessimiste
+Objectif : Lister ce qui aura fait échouer le projet, vu depuis l&#x27;échec
+Contraintes clés : Se placer six mois après l&#x27;échec, écrire au passé, aucune cause générique du type « mauvaise communication »
+Format de sortie : 8 causes classées par probabilité, avec le signal précoce de chacune
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">B4</span><h3>Arbitrage multicritère en Tree-of-thought</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Décideur méthodique</td></tr><tr><td class="l">Objectif</td><td>Explorer trois options en parallèle avant de conclure</td></tr><tr><td class="l">Contraintes clés</td><td>Développer les trois branches complètement avant toute comparaison, ne pas abandonner une branche en cours de route</td></tr><tr><td class="l">Format de sortie</td><td>Branche 1, branche 2, branche 3, puis comparaison, puis recommandation</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xB4">Copier</button></div>
+<pre id="xB4">Rôle : Décideur méthodique
+Objectif : Explorer trois options en parallèle avant de conclure
+Contraintes clés : Développer les trois branches complètement avant toute comparaison, ne pas abandonner une branche en cours de route
+Format de sortie : Branche 1, branche 2, branche 3, puis comparaison, puis recommandation
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">B5</span><h3>Extraction structurée depuis un texte libre</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Opérateur de saisie méticuleux</td></tr><tr><td class="l">Objectif</td><td>Passer d&#x27;un texte non structuré à un tableau exploitable</td></tr><tr><td class="l">Contraintes clés</td><td>Ne jamais compléter un champ absent, écrire null, ne pas normaliser les formats sans le signaler</td></tr><tr><td class="l">Format de sortie</td><td>Tableau à colonnes imposées, plus une ligne de champs non trouvés</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xB5">Copier</button></div>
+<pre id="xB5">Rôle : Opérateur de saisie méticuleux
+Objectif : Passer d&#x27;un texte non structuré à un tableau exploitable
+Contraintes clés : Ne jamais compléter un champ absent, écrire null, ne pas normaliser les formats sans le signaler
+Format de sortie : Tableau à colonnes imposées, plus une ligne de champs non trouvés
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">B6</span><h3>Contre-argumentation de ma propre position</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Avocat de la partie adverse</td></tr><tr><td class="l">Objectif</td><td>Attaquer ma position pour en trouver les failles</td></tr><tr><td class="l">Contraintes clés</td><td>Interdiction de concéder quoi que ce soit, prendre la position la plus forte possible contre moi</td></tr><tr><td class="l">Format de sortie</td><td>5 attaques classées par force, avec ce qu&#x27;il faudrait pour y répondre</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xB6">Copier</button></div>
+<pre id="xB6">Rôle : Avocat de la partie adverse
+Objectif : Attaquer ma position pour en trouver les failles
+Contraintes clés : Interdiction de concéder quoi que ce soit, prendre la position la plus forte possible contre moi
+Format de sortie : 5 attaques classées par force, avec ce qu&#x27;il faudrait pour y répondre
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<h2>Famille C · Ressources humaines et management</h2>
+<div class="pr">
+  <div class="prh"><span class="ref">C1</span><h3>Trame d&#x27;entretien annuel</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Responsable RH</td></tr><tr><td class="l">Objectif</td><td>Préparer un entretien sur des faits, pas des impressions</td></tr><tr><td class="l">Contraintes clés</td><td>Chaque question appelle un fait observable et daté, aucune question sur la personnalité</td></tr><tr><td class="l">Format de sortie</td><td>6 questions, avec pour chacune ce qu&#x27;une bonne réponse contient</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xC1">Copier</button></div>
+<pre id="xC1">Rôle : Responsable RH
+Objectif : Préparer un entretien sur des faits, pas des impressions
+Contraintes clés : Chaque question appelle un fait observable et daté, aucune question sur la personnalité
+Format de sortie : 6 questions, avec pour chacune ce qu&#x27;une bonne réponse contient
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">C2</span><h3>Fiche de poste à partir d&#x27;un besoin flou</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Chargé de recrutement</td></tr><tr><td class="l">Objectif</td><td>Transformer un besoin oral en fiche exploitable</td></tr><tr><td class="l">Contraintes clés</td><td>Distinguer indispensable et souhaitable, marquer [à arbitrer] tout ce qui n&#x27;a pas été dit</td></tr><tr><td class="l">Format de sortie</td><td>Mission, activités, indispensable, souhaitable, points à arbitrer</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xC2">Copier</button></div>
+<pre id="xC2">Rôle : Chargé de recrutement
+Objectif : Transformer un besoin oral en fiche exploitable
+Contraintes clés : Distinguer indispensable et souhaitable, marquer [à arbitrer] tout ce qui n&#x27;a pas été dit
+Format de sortie : Mission, activités, indispensable, souhaitable, points à arbitrer
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">C3</span><h3>Retour correctif à un collaborateur</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Manager bienveillant et direct</td></tr><tr><td class="l">Objectif</td><td>Formuler un retour difficile sans le diluer</td></tr><tr><td class="l">Contraintes clés</td><td>Un seul sujet, un fait daté, un effet constaté, une demande précise, aucune généralisation</td></tr><tr><td class="l">Format de sortie</td><td>Fait, effet, demande, ouverture</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xC3">Copier</button></div>
+<pre id="xC3">Rôle : Manager bienveillant et direct
+Objectif : Formuler un retour difficile sans le diluer
+Contraintes clés : Un seul sujet, un fait daté, un effet constaté, une demande précise, aucune généralisation
+Format de sortie : Fait, effet, demande, ouverture
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">C4</span><h3>Grille de lecture de candidatures</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Évaluateur équitable</td></tr><tr><td class="l">Objectif</td><td>Comparer des candidatures sur des critères fixés d&#x27;avance</td></tr><tr><td class="l">Contraintes clés</td><td>Aucun critère lié à l&#x27;âge, au genre, à l&#x27;origine ou à la situation familiale ; noter « non évaluable » plutôt que déduire</td></tr><tr><td class="l">Format de sortie</td><td>Tableau candidats en lignes, critères en colonnes</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xC4">Copier</button></div>
+<pre id="xC4">Rôle : Évaluateur équitable
+Objectif : Comparer des candidatures sur des critères fixés d&#x27;avance
+Contraintes clés : Aucun critère lié à l&#x27;âge, au genre, à l&#x27;origine ou à la situation familiale ; noter « non évaluable » plutôt que déduire
+Format de sortie : Tableau candidats en lignes, critères en colonnes
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">C5</span><h3>Préparation d&#x27;un point d&#x27;équipe</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Animateur de réunion</td></tr><tr><td class="l">Objectif</td><td>Construire un ordre du jour qui tient dans le temps imparti</td></tr><tr><td class="l">Contraintes clés</td><td>Chaque point porte une durée et une finalité, décision, information ou discussion</td></tr><tr><td class="l">Format de sortie</td><td>Ordre du jour minuté, avec le point sacrifiable en cas de retard</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xC5">Copier</button></div>
+<pre id="xC5">Rôle : Animateur de réunion
+Objectif : Construire un ordre du jour qui tient dans le temps imparti
+Contraintes clés : Chaque point porte une durée et une finalité, décision, information ou discussion
+Format de sortie : Ordre du jour minuté, avec le point sacrifiable en cas de retard
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<h2>Famille D · Commercial et relation client</h2>
+<div class="pr">
+  <div class="prh"><span class="ref">D1</span><h3>Préparation d&#x27;un rendez-vous de découverte</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Commercial en vente conseil</td></tr><tr><td class="l">Objectif</td><td>Préparer des questions ouvertes, pas un argumentaire</td></tr><tr><td class="l">Contraintes clés</td><td>Aucune question fermée, aucune mention de l&#x27;offre, 10 questions maximum</td></tr><tr><td class="l">Format de sortie</td><td>Questions classées par thème, avec l&#x27;information cherchée par chacune</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xD1">Copier</button></div>
+<pre id="xD1">Rôle : Commercial en vente conseil
+Objectif : Préparer des questions ouvertes, pas un argumentaire
+Contraintes clés : Aucune question fermée, aucune mention de l&#x27;offre, 10 questions maximum
+Format de sortie : Questions classées par thème, avec l&#x27;information cherchée par chacune
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">D2</span><h3>Réponse à une demande de remise</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Négociateur qui tient sa valeur</td></tr><tr><td class="l">Objectif</td><td>Répondre sans céder ni braquer</td></tr><tr><td class="l">Contraintes clés</td><td>Ne jamais accorder la remise dans le premier message, proposer une contrepartie, rester sous 100 mots</td></tr><tr><td class="l">Format de sortie</td><td>Corps du message, plus les deux contreparties possibles</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xD2">Copier</button></div>
+<pre id="xD2">Rôle : Négociateur qui tient sa valeur
+Objectif : Répondre sans céder ni braquer
+Contraintes clés : Ne jamais accorder la remise dans le premier message, proposer une contrepartie, rester sous 100 mots
+Format de sortie : Corps du message, plus les deux contreparties possibles
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">D3</span><h3>Qualification d&#x27;un besoin entrant</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Chargé de qualification</td></tr><tr><td class="l">Objectif</td><td>Décider si le besoin entre dans le périmètre</td></tr><tr><td class="l">Contraintes clés</td><td>Poser les questions manquantes plutôt que supposer, conclure par qualifié, à qualifier ou hors périmètre</td></tr><tr><td class="l">Format de sortie</td><td>Ce que je sais, ce qui manque, verdict</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xD3">Copier</button></div>
+<pre id="xD3">Rôle : Chargé de qualification
+Objectif : Décider si le besoin entre dans le périmètre
+Contraintes clés : Poser les questions manquantes plutôt que supposer, conclure par qualifié, à qualifier ou hors périmètre
+Format de sortie : Ce que je sais, ce qui manque, verdict
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">D4</span><h3>Traitement d&#x27;une réclamation client</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Chargé de relation client</td></tr><tr><td class="l">Objectif</td><td>Répondre à une réclamation sans engagement non tenable</td></tr><tr><td class="l">Contraintes clés</td><td>Ne promettre aucun délai ni geste commercial non fourni en entrée, reconnaître le fait, donner la prochaine étape datée</td></tr><tr><td class="l">Format de sortie</td><td>Accusé de réception, fait reconnu, prochaine étape</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xD4">Copier</button></div>
+<pre id="xD4">Rôle : Chargé de relation client
+Objectif : Répondre à une réclamation sans engagement non tenable
+Contraintes clés : Ne promettre aucun délai ni geste commercial non fourni en entrée, reconnaître le fait, donner la prochaine étape datée
+Format de sortie : Accusé de réception, fait reconnu, prochaine étape
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">D5</span><h3>Synthèse de comptes rendus de rendez-vous</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Analyste commercial</td></tr><tr><td class="l">Objectif</td><td>Faire ressortir les motifs récurrents de plusieurs comptes rendus</td></tr><tr><td class="l">Contraintes clés</td><td>Ne remonter qu&#x27;un motif apparaissant au moins trois fois, citer les occurrences</td></tr><tr><td class="l">Format de sortie</td><td>Motifs récurrents, occurrences, motifs isolés écartés</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xD5">Copier</button></div>
+<pre id="xD5">Rôle : Analyste commercial
+Objectif : Faire ressortir les motifs récurrents de plusieurs comptes rendus
+Contraintes clés : Ne remonter qu&#x27;un motif apparaissant au moins trois fois, citer les occurrences
+Format de sortie : Motifs récurrents, occurrences, motifs isolés écartés
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<h2>Famille E · Gestion, finance et administration</h2>
+<div class="pr">
+  <div class="prh"><span class="ref">E1</span><h3>Contrôle de cohérence d&#x27;un jeu de chiffres</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Contrôleur de gestion</td></tr><tr><td class="l">Objectif</td><td>Repérer les incohérences arithmétiques et logiques</td></tr><tr><td class="l">Contraintes clés</td><td>Recalculer chaque total, signaler tout écart même minime, ne corriger aucune valeur soi-même</td></tr><tr><td class="l">Format de sortie</td><td>Tableau : ligne, valeur annoncée, valeur recalculée, écart</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xE1">Copier</button></div>
+<pre id="xE1">Rôle : Contrôleur de gestion
+Objectif : Repérer les incohérences arithmétiques et logiques
+Contraintes clés : Recalculer chaque total, signaler tout écart même minime, ne corriger aucune valeur soi-même
+Format de sortie : Tableau : ligne, valeur annoncée, valeur recalculée, écart
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">E2</span><h3>Résumé d&#x27;un document contractuel</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Juriste d&#x27;entreprise prudent</td></tr><tr><td class="l">Objectif</td><td>Faire ressortir les engagements et les échéances</td></tr><tr><td class="l">Contraintes clés</td><td>Citer l&#x27;article ou la clause pour chaque point, écrire [non trouvé] plutôt que déduire, ne donner aucun avis juridique</td></tr><tr><td class="l">Format de sortie</td><td>Engagements, échéances, points d&#x27;attention, non trouvés</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xE2">Copier</button></div>
+<pre id="xE2">Rôle : Juriste d&#x27;entreprise prudent
+Objectif : Faire ressortir les engagements et les échéances
+Contraintes clés : Citer l&#x27;article ou la clause pour chaque point, écrire [non trouvé] plutôt que déduire, ne donner aucun avis juridique
+Format de sortie : Engagements, échéances, points d&#x27;attention, non trouvés
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">E3</span><h3>Note de cadrage budgétaire</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Responsable budgétaire</td></tr><tr><td class="l">Objectif</td><td>Structurer une demande de budget argumentée</td></tr><tr><td class="l">Contraintes clés</td><td>Distinguer coûts récurrents et non récurrents, chiffrer l&#x27;option de ne rien faire</td></tr><tr><td class="l">Format de sortie</td><td>Besoin, options chiffrées, option retenue, coût de l&#x27;inaction</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xE3">Copier</button></div>
+<pre id="xE3">Rôle : Responsable budgétaire
+Objectif : Structurer une demande de budget argumentée
+Contraintes clés : Distinguer coûts récurrents et non récurrents, chiffrer l&#x27;option de ne rien faire
+Format de sortie : Besoin, options chiffrées, option retenue, coût de l&#x27;inaction
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">E4</span><h3>Préparation d&#x27;un dossier de financement</h3></div>
+  <div class="tw"><table><tr><td class="l">Rôle</td><td>Monteur de dossier</td></tr><tr><td class="l">Objectif</td><td>Lister pièce par pièce ce qui manque au dossier</td></tr><tr><td class="l">Contraintes clés</td><td>Se fonder uniquement sur la liste de pièces fournie, ne pas inventer d&#x27;exigence</td></tr><tr><td class="l">Format de sortie</td><td>Pièces fournies, pièces manquantes, pièces à mettre à jour</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xE4">Copier</button></div>
+<pre id="xE4">Rôle : Monteur de dossier
+Objectif : Lister pièce par pièce ce qui manque au dossier
+Contraintes clés : Se fonder uniquement sur la liste de pièces fournie, ne pas inventer d&#x27;exigence
+Format de sortie : Pièces fournies, pièces manquantes, pièces à mettre à jour
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<h2>Famille F · Prompts système pour agents</h2>
+<div class="pr">
+  <div class="prh"><span class="ref">F1</span><h3>Assistant de rédaction au format maison</h3></div>
+  <div class="tw"><table><tr><td class="l">Ce que le prompt système fixe</td><td>Registre, longueur, structure imposée, vocabulaire interdit</td></tr><tr><td class="l">Garde-fou central</td><td>Refuser de produire hors du format plutôt que d&#x27;improviser</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xF1">Copier</button></div>
+<pre id="xF1">Ce que le prompt système fixe : Registre, longueur, structure imposée, vocabulaire interdit
+Garde-fou central : Refuser de produire hors du format plutôt que d&#x27;improviser
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">F2</span><h3>Assistant de réponse documentaire</h3></div>
+  <div class="tw"><table><tr><td class="l">Ce que le prompt système fixe</td><td>Périmètre documentaire, obligation de citer, comportement hors périmètre</td></tr><tr><td class="l">Garde-fou central</td><td>Répondre « je ne trouve pas dans les documents fournis » plutôt que de compléter de mémoire</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xF2">Copier</button></div>
+<pre id="xF2">Ce que le prompt système fixe : Périmètre documentaire, obligation de citer, comportement hors périmètre
+Garde-fou central : Répondre « je ne trouve pas dans les documents fournis » plutôt que de compléter de mémoire
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">F3</span><h3>Assistant de qualification</h3></div>
+  <div class="tw"><table><tr><td class="l">Ce que le prompt système fixe</td><td>Questions à poser dans l&#x27;ordre, critère d&#x27;arrêt, verdict autorisé</td></tr><tr><td class="l">Garde-fou central</td><td>Ne jamais conclure avant d&#x27;avoir toutes les réponses</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xF3">Copier</button></div>
+<pre id="xF3">Ce que le prompt système fixe : Questions à poser dans l&#x27;ordre, critère d&#x27;arrêt, verdict autorisé
+Garde-fou central : Ne jamais conclure avant d&#x27;avoir toutes les réponses
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">F4</span><h3>Assistant de relecture critique</h3></div>
+  <div class="tw"><table><tr><td class="l">Ce que le prompt système fixe</td><td>Ce qu&#x27;il vérifie, dans quel ordre, ce qu&#x27;il ne corrige pas</td></tr><tr><td class="l">Garde-fou central</td><td>Ne pas réécrire, seulement signaler</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xF4">Copier</button></div>
+<pre id="xF4">Ce que le prompt système fixe : Ce qu&#x27;il vérifie, dans quel ordre, ce qu&#x27;il ne corrige pas
+Garde-fou central : Ne pas réécrire, seulement signaler
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">F5</span><h3>Assistant de synthèse récurrente</h3></div>
+  <div class="tw"><table><tr><td class="l">Ce que le prompt système fixe</td><td>Format de sortie stable d&#x27;une exécution à l&#x27;autre, sources acceptées</td></tr><tr><td class="l">Garde-fou central</td><td>Sortie identique en structure quelle que soit l&#x27;entrée</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xF5">Copier</button></div>
+<pre id="xF5">Ce que le prompt système fixe : Format de sortie stable d&#x27;une exécution à l&#x27;autre, sources acceptées
+Garde-fou central : Sortie identique en structure quelle que soit l&#x27;entrée
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+<div class="pr">
+  <div class="prh"><span class="ref">F6</span><h3>Assistant à validation humaine obligatoire</h3></div>
+  <div class="tw"><table><tr><td class="l">Ce que le prompt système fixe</td><td>Liste fermée des actions autorisées, actions nécessitant confirmation</td></tr><tr><td class="l">Garde-fou central</td><td>Aucune action à effet de bord sans confirmation explicite</td></tr></table></div>
+  <div class="p"><div class="pb"><span>À adapter puis coller</span><button class="k" data-t="xF6">Copier</button></div>
+<pre id="xF6">Ce que le prompt système fixe : Liste fermée des actions autorisées, actions nécessitant confirmation
+Garde-fou central : Aucune action à effet de bord sans confirmation explicite
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+</div>
+</main>
+<footer><p>Formation Référent IA, journée 3, animée par Clément Predo pour l'Agence Nikita. <a href="https://www.linkedin.com/in/clement-predo" target="_blank" rel="noopener">LinkedIn</a></p></footer>
+<script>
+document.querySelectorAll("button.k").forEach(function(b){b.addEventListener("click",function(){
+var e=document.getElementById(b.dataset.t);if(!e)return;
+navigator.clipboard.writeText(e.innerText).then(function(){var o=b.textContent;b.textContent="Copié";b.classList.add("ok");
+setTimeout(function(){b.textContent=o;b.classList.remove("ok");},1500);}).catch(function(){});});});
+</script></body></html>
