@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kit J3 · Prompting & souveraineté</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{color-scheme:light;--paper:#F7F6F3;--card:#fff;--ink:#15181D;--ink2:#4A5058;--ink3:#7C838C;
+ --rule:#E2E0DA;--rule2:#C9C6BE;--nav:#1B2735;--navink:#EDF1F6;--acc:#2A5FA8;--accbg:#EDF3FC;
+ --ok:#1F7A4D;--okbg:#EDF7F1;--warn:#9A6410;--warnbg:#FBF4E6;
+ --code:#161C26;--codeink:#DCE5F0;--coderule:#2D3846;--sh:0 1px 2px rgba(20,24,30,.06),0 4px 14px rgba(20,24,30,.05)}
+@media(prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;
+ --paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;--ink3:#848B94;--rule:#282D35;--rule2:#3A4049;
+ --nav:#0A0D11;--acc:#7EAAE8;--accbg:#16202E;--ok:#5FC08C;--okbg:#12241A;--warn:#E0A83E;--warnbg:#241C0D;
+ --code:#0A0E14;--coderule:#232B36;--sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#0F1216;--card:#171B21;--ink:#F1EFEA;--ink2:#B4BAC2;
+ --ink3:#848B94;--rule:#282D35;--rule2:#3A4049;--nav:#0A0D11;--acc:#7EAAE8;--accbg:#16202E;--ok:#5FC08C;
+ --okbg:#12241A;--warn:#E0A83E;--warnbg:#241C0D;--code:#0A0E14;--coderule:#232B36;
+ --sh:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:16px;line-height:1.6}
+header{background:var(--nav);color:var(--navink);padding:26px 20px}
+.in{max-width:860px;margin:0 auto}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8FA5C0;margin:0 0 8px}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(24px,5vw,34px);margin:0 0 8px;letter-spacing:-.02em;line-height:1.15}
+header p{margin:0;color:#C6D2E0;font-size:14.5px}
+nav{position:sticky;top:0;z-index:9;background:var(--paper);border-bottom:1px solid var(--rule);padding:8px 20px;overflow-x:auto}
+nav .in{display:flex;gap:6px;white-space:nowrap}
+nav a{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;text-decoration:none;color:var(--ink2);
+ border:1px solid var(--rule2);padding:4px 10px;border-radius:20px}
+nav a:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+main{max-width:860px;margin:0 auto;padding:0 20px 70px}
+.band{font-family:"Archivo",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--ink3);margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule2);
+ display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.band span{font-family:"IBM Plex Mono",monospace;letter-spacing:0;text-transform:none;font-size:12px}
+.c{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:17px 19px;margin:0 0 12px;box-shadow:var(--sh)}
+.ch{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin-bottom:7px}
+.h{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:13px;font-weight:600;
+ background:var(--paper);border:1px solid var(--rule2);padding:2px 8px;border-radius:5px;white-space:nowrap}
+.c h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:17.5px;margin:0;flex:1;min-width:170px}
+.c h3{font-family:"Archivo",sans-serif;font-size:15px;margin:16px 0 6px}
+.c p{margin:7px 0;color:var(--ink2)}
+.c ol,.c ul{margin:7px 0;padding-left:19px;color:var(--ink2)}.c li{margin:5px 0}
+.b{border-left:3px solid;border-radius:0 7px 7px 0;padding:10px 13px;margin:10px 0}
+.b .t{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.b p:last-child{margin-bottom:0}
+.ba{background:var(--accbg);border-color:var(--acc)}.ba .t{color:var(--acc)}
+.bo{background:var(--okbg);border-color:var(--ok)}.bo .t{color:var(--ok)}
+.bw{background:var(--warnbg);border-color:var(--warn)}.bw .t{color:var(--warn)}
+.p{background:var(--code);color:var(--codeink);border:1px solid var(--coderule);border-radius:8px;margin:10px 0;overflow:hidden}
+.pb{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:6px 11px;border-bottom:1px solid var(--coderule);
+ font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#8FA5C0}
+.p pre{margin:0;padding:12px 14px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+button.k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+ cursor:pointer;background:transparent;color:#8FA5C0;border:1px solid var(--coderule);padding:3px 9px;border-radius:5px}
+button.k:hover{background:#232B36;color:#fff}button.k.ok{color:#6FCF97;border-color:#2E5C43}
+button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:400px}
+th{background:var(--nav);color:var(--navink);text-align:left;padding:7px 10px;font-weight:600;font-size:12px}
+td{border-bottom:1px solid var(--rule);padding:7px 10px;vertical-align:top;color:var(--ink2)}
+td:first-child{color:var(--ink);font-weight:500}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:var(--paper);border:1px solid var(--rule);padding:1px 5px;border-radius:4px}
+a{color:var(--acc)}
+.lk{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.lk a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--ink);
+ background:var(--paper);border:1px solid var(--rule2);padding:7px 12px;border-radius:7px}
+.lk a:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+footer{max-width:860px;margin:0 auto;padding:22px 20px 40px;border-top:1px solid var(--rule);color:var(--ink3);font-size:13.5px}
+footer a{font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header><div class="in">
+  <p class="eyebrow">Formation Référent IA · Agence Nikita · Journée 3</p>
+  <h1>Votre kit de la journée</h1>
+  <p>Prompting et souveraineté technique · Lyon, 9 septembre 2026</p>
+</div></header>
+
+<nav><div class="in">
+  <a href="#matin">Matin</a><a href="#a1">Atelier 1</a><a href="#a2">Atelier 2</a><a href="#a3">Atelier 3</a>
+  <a href="#aprem">Après-midi</a><a href="#install">Installer</a><a href="#a4">Atelier 4</a><a href="#a5">Atelier 5</a>
+  <a href="#bonus">Pour aller plus loin</a><a href="#outils">Outils</a>
+</div></nav>
+
+<main>
+
+<div class="band" id="matin">Matin · le prompting<span>9h00 à 12h30</span></div>
+
+<div class="c">
+  <div class="ch"><span class="h">9h35</span><h2>Les six composants d'un prompt</h2></div>
+  <p>C'est la grille unique. Les frameworks n'en sont que des façons de la ranger. Pour chacun, ce qui casse quand il manque.</p>
+  <div class="tw"><table>
+    <tr><th>Composant</th><th>Ce qui casse quand il manque</th></tr>
+    <tr><td>Rôle</td><td>Le registre est faux</td></tr>
+    <tr><td>Objectif</td><td>Il fait quelque chose de proche, mais pas ça</td></tr>
+    <tr><td>Contexte</td><td>Il comble avec du générique. <b>L'erreur numéro un.</b></td></tr>
+    <tr><td>Contraintes</td><td>Longueur et ton partent dans tous les sens</td></tr>
+    <tr><td>Format de sortie</td><td>Le format change à chaque exécution</td></tr>
+    <tr><td>Exemple</td><td>Il ne peut pas viser juste sur un rendu inhabituel</td></tr>
+    <tr><td><b>Critère de succès</b></td><td>Dans six mois, personne ne sait si le prompt marche encore</td></tr>
+  </table></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">9h50</span><h2>Les trois grammaires</h2></div>
+  <div class="tw"><table>
+    <tr><th>Framework</th><th>Ce qu'il découpe</th><th>Quand le prendre</th></tr>
+    <tr><td>RICCE</td><td>Rôle, Instructions, Contexte, Contraintes, Exemples</td><td>Le plus complet. Celui de votre bibliothèque.</td></tr>
+    <tr><td>CO-STAR</td><td>Contexte, Objectif, Style, Ton, Audience, Réponse</td><td>Le rédactionnel. Le ton y a sa case.</td></tr>
+    <tr><td>RACE</td><td>Rôle, Action, Contexte, Attendu</td><td>Le format court, à retenir de tête.</td></tr>
+  </table></div>
+  <div class="p"><div class="pb"><span>Gabarit RICCE</span><button class="k" data-t="g1">Copier</button></div>
+<pre id="g1">Tu es [rôle précis].
+Voici ce que je veux : [instructions].
+Contexte : [ce que le modèle ne peut pas deviner].
+Contraintes : [longueur, ton, ce qu'il ne doit pas faire].
+Exemple de ce que j'attends : [un échantillon].
+
+Si une information manque, écris « non précisé » plutôt que de la deviner.</pre></div>
+  <div class="p"><div class="pb"><span>Gabarit CO-STAR</span><button class="k" data-t="g2">Copier</button></div>
+<pre id="g2">Contexte : [la situation].
+Objectif : [ce que le texte doit accomplir].
+Style : [factuel, narratif, technique].
+Ton : [neutre, chaleureux, ferme].
+Audience : [qui va lire].
+Réponse attendue : [format exact].</pre></div>
+  <div class="b bw"><span class="t">Le piège</span><p>Ces frameworks ne sont pas des standards normalisés. Leur seule valeur : garantir qu'aucun composant n'est oublié. Retenez la question, pas l'acronyme : <b>qui parle, sur quoi, pour faire quoi, rendu comment.</b></p></div>
+</div>
+
+<div class="c" id="a1">
+  <div class="ch"><span class="h">10h15</span><h2>Atelier 1 · Le même besoin dans trois grammaires</h2></div>
+  <p><b>Ce que vous faites.</b> Prenez le cas fil rouge choisi ce matin. Écrivez-le en RICCE, puis en CO-STAR, puis en RACE. Lancez les trois.</p>
+  <p><b>Ce que vous rendez.</b> Les trois versions du prompt, les trois sorties, et en trois lignes lequel vous gardez et pourquoi.</p>
+  <p><b>Combien de temps.</b> 22 minutes de production, 8 minutes de restitution. En sous-groupes de 3 à 4.</p>
+  <div class="b bw"><span class="t">La règle, valable toute la journée</span><p>Aucune donnée réelle. Pas de nom de client, pas de document d'entreprise, pas de donnée personnelle. Le cas fictif suffit.</p></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">11h00</span><h2>Faire raisonner le modèle</h2></div>
+  <h3>Chain-of-thought · un raisonnement en ligne droite</h3>
+  <div class="p"><div class="pb"><span>Trois formulations qui marchent</span><button class="k" data-t="c1">Copier</button></div>
+<pre id="c1">Procède étape par étape et montre ton raisonnement avant de conclure.
+
+Procède en trois étapes : d'abord liste les éléments pertinents,
+ensuite compare-les, enfin conclus. Numérote les étapes.
+
+Avant de répondre, explique-moi comment tu vas t'y prendre.</pre></div>
+  <div class="b bw"><span class="t">À savoir</span><p>Le modèle peut produire un raisonnement parfaitement cohérent menant à une conclusion fausse. Voir les étapes ne garantit pas qu'elles sont justes, ça vous permet de repérer où ça a dérapé.</p></div>
+  <h3>Tree-of-thought · plusieurs branches, puis un choix</h3>
+  <div class="p"><div class="pb"><span>La structure, en un seul prompt</span><button class="k" data-t="c2">Copier</button></div>
+<pre id="c2">Propose trois approches différentes de ce problème,
+sans les développer, une phrase chacune.
+Pour chacune, donne un avantage et une limite.
+Puis choisis celle que tu recommandes et dis-moi pourquoi.</pre></div>
+  <div class="p"><div class="pb"><span>Si les trois options se ressemblent</span><button class="k" data-t="c3">Copier</button></div>
+<pre id="c3">Les trois approches doivent reposer sur des logiques différentes,
+pas sur des variantes de la même idée.</pre></div>
+</div>
+
+<div class="c" id="a2">
+  <div class="ch"><span class="h">11h20</span><h2>Atelier 2 · Un arbitrage en tree-of-thought</h2></div>
+  <p><b>Ce que vous faites.</b> Prenez un arbitrage de votre métier. Écrivez un prompt en trois temps : propose trois approches, avantage et limite de chacune, puis recommande.</p>
+  <p><b>Ce que vous rendez.</b> Le prompt, les trois options, et vous signalez celles qui sont des doublons déguisés.</p>
+  <p><b>Combien de temps.</b> 14 minutes de production, 6 de restitution. En binôme.</p>
+  <div class="b ba"><span class="t">Ce qui va vous arriver</span><p>Neuf fois sur dix, la troisième option est une variante de la première. La parade est le prompt de divergence ci-dessus.</p></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">11h40</span><h2>Le prompt système d'un agent</h2></div>
+  <p>Un prompt de conversation est jetable. Un prompt système est un contrat permanent : il s'applique à toutes les conversations qui suivent, sans que personne ait à le redonner.</p>
+  <p><b>Six sections, dans cet ordre :</b> identité · mission (et ce qu'il ne fait pas) · sources autorisées · format de réponse · <b>comportement si l'information manque</b> · limites et interdits.</p>
+  <div class="p"><div class="pb"><span>La section 5, celle qu'on oublie et qui produit le plus d'hallucinations</span><button class="k" data-t="s5">Copier</button></div>
+<pre id="s5">Si l'information ne figure pas dans les sources fournies,
+réponds exactement : information non disponible dans les documents fournis.</pre></div>
+  <div class="b ba"><span class="t">Pourquoi « exactement »</span><p>Vous imposez une formule précise. Quand vous relisez cent réponses, vous cherchez cette phrase et vous savez immédiatement où il a manqué de matière.</p></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">12h00</span><h2>Les quatre lignes qui vous protègent</h2></div>
+  <p class="b bw" style="margin-bottom:12px"><span class="t">À dire à vos clients</span>Aucune ne supprime les hallucinations. Elles les réduisent et les rendent détectables. La seule parade complète reste la relecture humaine.</p>
+  <div class="p"><div class="pb"><span>1 · Ancrage sur la source</span><button class="k" data-t="h1">Copier</button></div>
+<pre id="h1">Réponds uniquement à partir du document fourni.
+Si l'information n'y est pas, écris NON TROUVÉ.</pre></div>
+  <div class="p"><div class="pb"><span>2 · Citation obligatoire</span><button class="k" data-t="h2">Copier</button></div>
+<pre id="h2">Pour chaque affirmation, cite le passage exact du document
+sur lequel tu t'appuies.</pre></div>
+  <div class="p"><div class="pb"><span>3 · Auto-critique · en SECOND message, jamais dans le premier</span><button class="k" data-t="h3">Copier</button></div>
+<pre id="h3">Relis ta réponse et liste ce qui pourrait être faux
+ou insuffisamment étayé.</pre></div>
+  <div class="p"><div class="pb"><span>4 · Aveu d'ignorance autorisé · la plus importante</span><button class="k" data-t="h4">Copier</button></div>
+<pre id="h4">Si une information manque, écris « non précisé »
+plutôt que de la deviner.</pre></div>
+  <h3>Le reverse prompting · quand vous ne savez pas ce qui manque</h3>
+  <div class="p"><div class="pb"><span>Il vous pose les questions, au lieu de deviner</span><button class="k" data-t="r1">Copier</button></div>
+<pre id="r1">Avant de répondre, pose-moi les questions dont tu as besoin
+pour produire exactement ce que j'attends.</pre></div>
+  <div class="p"><div class="pb"><span>La variante : comprendre un prompt qui marche</span><button class="k" data-t="r2">Copier</button></div>
+<pre id="r2">Reconstitue le prompt idéal qui aurait produit ce résultat,
+en détaillant chaque élément qu'il doit contenir.</pre></div>
+  <div class="b bo"><span class="t">Corriger un prompt · les trois règles</span>
+    <p>Un composant à la fois, sinon vous ne saurez pas lequel a produit l'effet. Le même cas de test, jamais un nouveau. Et la version qui marche va dans la bibliothèque, avec sa date.</p></div>
+</div>
+
+<div class="c" id="a3">
+  <div class="ch"><span class="h">12h15</span><h2>Atelier 3 · Votre bibliothèque</h2></div>
+  <p><b>Ce que vous faites.</b> Reprenez trois prompts écrits ce matin. Remplissez le gabarit ci-dessous pour chacun.</p>
+  <p><b>Ce que vous rendez.</b> Trois fiches complètes dans le document partagé dont le formateur donne le lien.</p>
+  <p><b>Combien de temps.</b> 12 minutes, puis 3 de mise en commun. Chacun pour soi.</p>
+  <div class="p"><div class="pb"><span>Le gabarit d'une fiche</span><button class="k" data-t="f1">Copier</button></div>
+<pre id="f1">Titre           : verbe à l'infinitif + objet
+Version         : v1
+Cas d'usage     : quand l'utiliser, une phrase
+Framework       : RICCE / CO-STAR / RACE
+Le prompt       : (en entier)
+Critère de succès : comment je sais que la sortie est bonne
+Testé           : oui / non
+Dernière revue  : jj/mm/aaaa</pre></div>
+  <div class="b bo"><span class="t">La seule règle qui compte</span><p>Un prompt qui n'a pas été lancé au moins une fois n'entre pas dans la bibliothèque. Dans six mois, la colonne « testé » est la seule qui vous dira ce qui marche encore.</p></div>
+  <div class="b ba"><span class="t">Intersession</span><p>Portez votre bibliothèque à dix fiches d'ici J8. Ce n'est pas noté, c'est le matériau de la bibliothèque collective.</p></div>
+</div>
+
+<div class="band" id="aprem">Après-midi · la souveraineté<span>13h30 à 17h00</span></div>
+
+<div class="c">
+  <div class="ch"><span class="h">13h40</span><h2>Ce qui part vraiment quand vous cliquez sur envoyer</h2></div>
+  <p>Quatre choses partent, pas une : <b>le contenu de votre message</b>, <b>les fichiers joints en entier</b>, <b>les métadonnées</b> (adresse réseau, identifiant de compte, horodatage) et <b>tout l'historique de la conversation</b>, renvoyé à chaque nouveau message.</p>
+  <div class="b bw"><span class="t">Ce qu'il faut en retenir</span><p>Le contenu n'est jamais le seul élément qui sort, et il est rattaché nominativement à vous et à votre organisation.</p></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">13h50</span><h2>Six mots qu'on confond en réunion</h2></div>
+  <div class="tw"><table>
+    <tr><th>Mot</th><th>Ce que ça veut dire vraiment</th></tr>
+    <tr><td>On-premise</td><td>Le serveur appartient à l'entreprise et vit dans ses locaux. Il peut rester connecté à internet.</td></tr>
+    <tr><td>Local</td><td>Ça tourne sur VOTRE poste. Ni sauvegarde, ni mise à jour, ni gestion des droits. <b>Ce n'est pas de l'on-premise.</b></td></tr>
+    <tr><td>Edge</td><td>Le calcul se fait au plus près de la donnée, pour la latence.</td></tr>
+    <tr><td>Cloud privé</td><td>Du cloud dédié à une seule organisation. Aucune garantie juridique de souveraineté en soi.</td></tr>
+    <tr><td>Cloud souverain</td><td>Immunisé aux lois extraterritoriales. En France, la référence est SecNumCloud (ANSSI).</td></tr>
+    <tr><td>SaaS</td><td>L'éditeur héberge tout, vous n'installez rien. L'opposé de l'on-premise.</td></tr>
+  </table></div>
+  <h3>Et deux pièges de vocabulaire</h3>
+  <p><b>« Modèle ouvert » n'est pas « open source ».</b> La plupart des modèles dits open source ne diffusent que leurs <i>poids</i> (open weights), pas le code d'entraînement ni les données. L'Open Source Initiative est explicite là-dessus.</p>
+  <p><b>« Air-gapped »</b> veut dire physiquement déconnecté de tout réseau. Un système on-premise n'est pas forcément air-gapped.</p>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">14h00</span><h2>Un modèle, c'est un fichier</h2></div>
+  <p>Un très gros fichier, plusieurs gigaoctets, qui ne fait rien tout seul. Ollama est le programme qui sait le lire. Comme un fichier vidéo et son lecteur.</p>
+  <div class="tw"><table>
+    <tr><th>Commande</th><th>Ce qu'elle fait</th></tr>
+    <tr><td><code>ollama --version</code></td><td>Vérifie que le lecteur est installé</td></tr>
+    <tr><td><code>ollama ls</code></td><td>Les modèles présents sur votre disque, avec leur poids</td></tr>
+    <tr><td><code>ollama pull &lt;modèle&gt;</code></td><td>Télécharge un modèle</td></tr>
+    <tr><td><code>ollama run &lt;modèle&gt;</code></td><td>Le charge et ouvre la conversation. <code>/bye</code> pour sortir</td></tr>
+    <tr><td><code>ollama show &lt;modèle&gt;</code></td><td>Sa fiche technique : paramètres, compression, contexte</td></tr>
+    <tr><td><code>ollama ps</code></td><td>Quel modèle est chargé en mémoire maintenant</td></tr>
+    <tr><td><code>ollama rm &lt;modèle&gt;</code></td><td>Le supprime et libère le disque</td></tr>
+  </table></div>
+  <div class="b bo"><span class="t">La question que tout le monde pose</span>
+    <p>Internet est nécessaire <b>une seule fois</b>, pour télécharger. Ensuite le modèle tourne hors ligne, indéfiniment. C'est exactement de là que vient la souveraineté : ce n'est pas une promesse contractuelle, c'est une propriété technique.</p></div>
+  <p>La bibliothèque officielle est sur <a href="https://ollama.com/library" target="_blank" rel="noopener">ollama.com/library</a>. Chaque fiche affiche le poids en Go avant que vous téléchargiez. Sur Mac, les fichiers vivent dans <code>~/.ollama/models</code>.</p>
+</div>
+
+<div class="c" id="install">
+  <div class="ch"><span class="h">14h20</span><h2>Installez-le sur votre machine, maintenant</h2></div>
+  <p>On le fait ensemble, étape par étape. Levez la main dès que vous décrochez, on n'avance pas sans vous.</p>
+  <ol>
+    <li>Allez sur <a href="https://ollama.com/download" target="_blank" rel="noopener">ollama.com/download</a></li>
+    <li>Cliquez sur votre système. Le fichier se télécharge.</li>
+    <li>Ouvrez-le et installez, comme n'importe quelle application. <b>Gratuit, aucun compte à créer.</b></li>
+    <li>Ouvrez le Terminal. <b>Mac</b> : cmd + espace, tapez « Terminal ». <b>Windows</b> : touche Windows, tapez « cmd ».</li>
+    <li>Tapez la commande de vérification ci-dessous. Un numéro s'affiche ? C'est installé.</li>
+  </ol>
+  <div class="p"><div class="pb"><span>Vérifier l'installation</span><button class="k" data-t="i1">Copier</button></div>
+<pre id="i1">ollama --version</pre></div>
+  <div class="p"><div class="pb"><span>Télécharger le petit modèle de la salle · 397 Mo</span><button class="k" data-t="i2">Copier</button></div>
+<pre id="i2">ollama pull qwen2.5:0.5b</pre></div>
+  <div class="p"><div class="pb"><span>Lui poser une question</span><button class="k" data-t="i3">Copier</button></div>
+<pre id="i3">ollama run qwen2.5:0.5b "Explique le RGPD en une phrase."</pre></div>
+  <div class="b bo"><span class="t">Le moment qui prouve tout · à faire tous ensemble</span>
+    <p><b>Coupez votre wifi. Complètement. Et reposez une question.</b> Il répond. Vous venez de prouver vous-mêmes, sur votre propre machine, que le calcul se fait chez vous et que rien ne sort.</p></div>
+  <div class="b bw"><span class="t">Si vous n'avez pas les droits d'administration</span>
+    <p>C'est fréquent sur un poste d'entreprise et ce n'est pas grave. Mettez-vous en binôme avec un voisin qui a pu installer, et notez la question à poser à votre service informatique : <i>« puis-je installer un exécuteur de modèles local sur mon poste, et si non, existe-t-il un poste de test ? »</i></p></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">14h50</span><h2>Quelle taille, et surtout quelle licence</h2></div>
+  <p><b>Le « 2b » ou « 7b »</b>, c'est le nombre de réglages internes appris, en milliards. Le poids du fichier se calcule : nombre de paramètres × la précision de stockage. Un modèle de 2,3 milliards de paramètres stockés sur 8 bits pèse environ 2,7 Go.</p>
+  <p><b>La quantisation</b>, c'est le JPEG du modèle : on stocke chaque réglage avec moins de précision. <code>q4</code> divise le poids par quatre pour environ 3 à 5 % de qualité en moins. <code>q8</code> est quasi identique à la pleine précision.</p>
+  <div class="tw"><table>
+    <tr><th>Modèle</th><th>Licence</th><th>Usage commercial en entreprise</th></tr>
+    <tr><td>Mistral 7B</td><td>Apache 2.0</td><td>✅ Vraiment libre, aucune restriction</td></tr>
+    <tr><td>DeepSeek</td><td>MIT</td><td>✅ Vraiment libre, aucune restriction</td></tr>
+    <tr><td>Qwen ≤ 35b</td><td>Apache 2.0</td><td>✅ Libre. Au-delà, licence Tongyi Qianwen</td></tr>
+    <tr><td>Llama</td><td>Llama Community License</td><td>🟡 Libre sous 700 millions d'utilisateurs par mois</td></tr>
+    <tr><td>Gemma</td><td>Gemma Terms of Use</td><td>🟡 Google garde un droit de restriction unilatéral</td></tr>
+  </table></div>
+  <div class="b bw"><span class="t">L'objection « ce modèle est chinois »</span>
+    <p>Un modèle qui tourne hors ligne est un <b>fichier statique, pas un service</b>. Il ne peut rien envoyer nulle part, faute de connexion. Le risque avec un éditeur étranger porte sur son application en ligne, pas sur le fichier de poids exécuté chez vous. <b>Origine du modèle et mode d'exécution sont deux questions différentes.</b></p></div>
+</div>
+
+<div class="c" id="a4">
+  <div class="ch"><span class="h">15h05</span><h2>Atelier 4 · Classer cinq jeux de données</h2></div>
+  <p><b>Ce que vous faites.</b> Pour chacun des cinq jeux, donnez un niveau de 1 à 4 et la question de test qui vous a fait trancher.</p>
+  <p><b>Combien de temps.</b> 8 minutes, en binôme.</p>
+  <div class="tw"><table>
+    <tr><th>Niveau</th><th>La question de test</th></tr>
+    <tr><td>N1 · public</td><td>Cette information est-elle déjà accessible à n'importe qui ?</td></tr>
+    <tr><td>N2 · interne</td><td>Sa divulgation gênerait-elle, sans préjudice réel ?</td></tr>
+    <tr><td>N3 · personnel</td><td>Une personne physique est-elle identifiable, même indirectement ?</td></tr>
+    <tr><td>N4 · hautement sensible</td><td>Sa divulgation causerait-elle un préjudice grave ?</td></tr>
+  </table></div>
+  <div class="b bo"><span class="t">La question à se poser en premier, sur chacun</span>
+    <p>Est-ce que cette donnée doit <b>vraiment</b> entrer dans la machine ? Souvent la réponse est non : on anonymise, et le problème disparaît avant même de choisir une architecture.</p></div>
+</div>
+
+<div class="c" id="a5">
+  <div class="ch"><span class="h">15h45</span><h2>Atelier 5 · Trois cas passés à la matrice</h2></div>
+  <p><b>Ce que vous faites, dans cet ordre.</b> Vous qualifiez la sensibilité. Puis vous vérifiez les deux vetos. Et seulement si aucun ne se déclenche, vous remplissez les sept critères.</p>
+  <p><b>Ce que vous rendez.</b> Un verdict par cas, avec les deux ou trois critères qui l'ont emporté. Pas un score : un raisonnement défendable.</p>
+  <p><b>Combien de temps.</b> 22 minutes, 8 de restitution. En sous-groupes. Traitez le cas 1, puis le 3, puis le 2.</p>
+  <div class="b bw"><span class="t">Les deux vetos, qui passent avant les sept critères</span>
+    <p><b>V-A</b> · une donnée de niveau 4 ne part pas chez un fournisseur soumis à un droit étranger.</p>
+    <p><b>V-B</b> · pas de solution locale sans personne identifiée pour l'exploiter, la mettre à jour et la superviser dans la durée. <b>C'est celui qu'on oublie, et celui qui tue les projets six mois après.</b></p></div>
+  <div class="b ba"><span class="t">Quand les deux vetos se contredisent</span>
+    <p>La matrice ne tranche pas seule. La question remonte au responsable de la conformité. Savoir dire « ceci n'est pas à mon niveau » est une compétence de référent, pas un aveu.</p></div>
+</div>
+
+<div class="c">
+  <div class="ch"><span class="h">16h15</span><h2>Quatre façons d'architecturer</h2></div>
+  <div class="tw"><table>
+    <tr><th>Patron</th><th>Quand</th></tr>
+    <tr><td>Tout cloud</td><td>Rien de sensible. Simple, rapide, peu cher à démarrer.</td></tr>
+    <tr><td>Tout local</td><td>Rien ne sort. Le plus contraignant à exploiter, exige une vraie équipe.</td></tr>
+    <tr><td>Hybride</td><td>Une passerelle route selon la sensibilité. <b>Le plus fréquent en entreprise.</b></td></tr>
+    <tr><td>Cloud + anonymisation</td><td>On retire les données identifiantes avant l'envoi. Attention à la ré-identification.</td></tr>
+  </table></div>
+  <div class="b bw"><span class="t">La question à poser à votre prestataire sur l'hybride</span>
+    <p>Comment la passerelle décide, et comment on audite ses décisions. Si la réponse est vague, l'architecture ne tient pas : un mauvais tri laisse partir la donnée sensible sans que personne ne le voie.</p></div>
+</div>
+
+<div class="band" id="bonus">Pour aller plus loin<span>si vous voulez creuser</span></div>
+
+<div class="c">
+  <h2 style="margin:0 0 10px">Six choses à tester vous-même</h2>
+  <p>Rien ici n'a été vu en séance. C'est du bonus, à essayer quand vous aurez un moment.</p>
+  <h3>1 · Faire critiquer un document par deux points de vue opposés</h3>
+  <div class="p"><div class="pb"><span>Utile avant un comité</span><button class="k" data-t="b1">Copier</button></div>
+<pre id="b1">Lis cette note. Produis deux critiques successives :
+d'abord celle d'un directeur financier qui cherche ce qui coûte,
+puis celle d'un opérationnel qui cherche ce qui ne marchera pas sur le terrain.
+Termine par les trois objections auxquelles je dois me préparer.</pre></div>
+  <h3>2 · Vérifier un chiffre avant de le citer</h3>
+  <div class="p"><div class="pb"><span>Le réflexe anti-hallucination</span><button class="k" data-t="b2">Copier</button></div>
+<pre id="b2">Pour chaque chiffre de ce texte, dis-moi :
+sa source si elle est citée, sa date, et s'il est vérifiable.
+Marque NON VÉRIFIABLE tout chiffre dont tu ne peux pas dire d'où il vient.</pre></div>
+  <h3>3 · Transformer des notes brutes en compte rendu</h3>
+  <div class="p"><div class="pb"><span>La dernière ligne est celle qui compte</span><button class="k" data-t="b3">Copier</button></div>
+<pre id="b3">Voici mes notes brutes de réunion. Rédige un compte rendu structuré :
+un paragraphe par sujet, puis un tableau des actions
+avec les colonnes action, responsable et échéance.
+
+Quand aucun responsable n'est nommé dans les notes, écris « à désigner »
+plutôt que d'attribuer la tâche à quelqu'un.</pre></div>
+  <div class="b ba"><span class="t">Pourquoi cette dernière ligne vaut de l'or</span><p>Sans elle, le modèle attribue la tâche à la personne citée dans la phrase, même si elle ne s'est engagée à rien. Vous repartez avec un compte rendu qui engage quelqu'un à son insu.</p></div>
+  <h3>4 · Se faire guider quand on ne sait pas faire</h3>
+  <div class="p"><div class="pb"><span>Marche pour n'importe quelle installation technique</span><button class="k" data-t="b4">Copier</button></div>
+<pre id="b4">Je n'ai jamais utilisé le terminal. Je veux [votre objectif].
+
+Guide-moi étape par étape. Pour chaque étape, dis-moi :
+la commande exacte à taper, ce que je dois voir à l'écran si ça a marché,
+et quoi faire si ce n'est pas ce que je vois.
+
+Ne saute aucune étape et attends que je te confirme avant de continuer.</pre></div>
+  <h3>5 · Comparer deux outils sans se faire vendre</h3>
+  <div class="p"><div class="pb"><span>Avant un choix d'outil</span><button class="k" data-t="b5">Copier</button></div>
+<pre id="b5">Compare [outil A] et [outil B] pour un responsable métier, pas pour un développeur.
+Pour chacun : à quel problème il répond, qui devrait l'utiliser,
+et ce qu'il coûte à faire vivre une fois installé.
+Termine par la question que je devrais poser à mon service informatique.</pre></div>
+  <h3>6 · Les assistants qui travaillent dans vos fichiers</h3>
+  <p>Au-delà du chat, il existe des assistants qui lisent et modifient vos fichiers directement sur votre machine : ils ouvrent un tableur, croisent deux sources, produisent un fichier exploitable. <b>Claude Code</b> en est un, et c'est celui que le formateur utilise au quotidien. La différence n'est pas de degré, elle est de nature : on ne pose plus une question, on confie un travail.</p>
+  <div class="b ba"><span class="t">Le bon réflexe pour démarrer</span><p>Commencez par une tâche que vous savez faire à la main et qui vous ennuie. Vous saurez juger le résultat, ce qui est impossible sur une tâche que vous ne maîtrisez pas.</p></div>
+</div>
+
+<div class="band" id="outils">Les outils et les liens<span>tout est gratuit sauf mention</span></div>
+
+<div class="c">
+  <h3 style="margin-top:0">Faire tourner un modèle chez soi</h3>
+  <div class="lk">
+    <a href="https://ollama.com/download" target="_blank" rel="noopener">Ollama · télécharger</a>
+    <a href="https://ollama.com/library" target="_blank" rel="noopener">Ollama · bibliothèque de modèles</a>
+    <a href="https://localai.io" target="_blank" rel="noopener">LocalAI</a>
+    <a href="https://huggingface.co/models" target="_blank" rel="noopener">Hugging Face · modèles</a>
+  </div>
+  <h3>Les textes de référence</h3>
+  <div class="lk">
+    <a href="https://www.cnil.fr/fr/les-fiches-pratiques-ia" target="_blank" rel="noopener">CNIL · fiches pratiques IA</a>
+    <a href="https://www.cnil.fr/fr/developpement-des-systemes-dia-les-recommandations-de-la-cnil-pour-respecter-le-rgpd" target="_blank" rel="noopener">CNIL · IA et RGPD</a>
+    <a href="https://cyber.gouv.fr/secnumcloud" target="_blank" rel="noopener">ANSSI · SecNumCloud</a>
+    <a href="https://opensource.org/ai/open-weights" target="_blank" rel="noopener">OSI · open weights</a>
+  </div>
+  <div class="b bw"><span class="t">Le rappel qui vous protège</span>
+    <p>Un traitement local reste un traitement de données personnelles. La CNIL est explicite : le RGPD s'applique intégralement, sans exception liée à la technologie. Base légale, minimisation, sécurité, information des personnes, durée de conservation : <b>rien de tout ça ne disparaît parce que la machine est chez vous.</b></p></div>
+</div>
+
+</main>
+
+<footer>
+  <p><b>Un prompt qui ne peut pas être relu, réutilisé et corrigé par un collègue n'est pas un livrable professionnel.</b></p>
+  <p>Journée animée par Clément Predo, Axem IA, pour l'Agence Nikita.
+  <a href="https://www.linkedin.com/in/clement-predo" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+
+<script>
+document.querySelectorAll("button.k").forEach(function(b){
+  b.addEventListener("click",function(){
+    var e=document.getElementById(b.dataset.t); if(!e)return;
+    navigator.clipboard.writeText(e.innerText).then(function(){
+      var o=b.textContent;b.textContent="Copié";b.classList.add("ok");
+      setTimeout(function(){b.textContent=o;b.classList.remove("ok");},1500);
+    }).catch(function(){b.textContent="Sélectionnez";setTimeout(function(){b.textContent="Copier";},1500);});
+  });
+});
+</script>
+</body>
+</html>
